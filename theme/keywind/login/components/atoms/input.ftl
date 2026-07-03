@@ -4,7 +4,7 @@
 <#macro
   kw
   autofocus=false
-  class="block bg-[var(--kw-surface)] border-[var(--kw-border-strong)] mt-1.5 placeholder-[var(--kw-text-subtle)] rounded-xl text-[var(--kw-text)] w-full focus:border-primary-500 focus:ring focus:ring-[var(--kw-focus)] sm:text-sm transition-colors"
+  class="block w-full rounded-2xl border border-[var(--kw-border)] bg-[var(--kw-surface)] px-4 py-3 text-[var(--kw-text)] placeholder:text-[var(--kw-text-subtle)] focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500/30 sm:text-sm transition-colors"
   disabled=false
   invalid=false
   label=""
@@ -14,10 +14,12 @@
   type="text"
   rest...
 >
-  <div>
-    <label class="sr-only" for="${name}">
-      ${label}
-    </label>
+  <div class="space-y-1.5">
+    <#if label?has_content>
+      <label class="block text-sm font-medium text-[var(--kw-text)]" for="${name}">
+        ${label}
+      </label>
+    </#if>
     <#if type == "password">
       <div class="relative" x-data="{ show: false }">
         <input
@@ -40,7 +42,7 @@
           @click="show = !show"
           aria-controls="${name}"
           :aria-expanded="show"
-          class="absolute text-[var(--kw-text-subtle)] hover:text-[var(--kw-text-muted)] right-3 top-3 sm:top-2.5 transition-colors"
+          class="absolute right-4 top-3.5 text-[var(--kw-text-subtle)] hover:text-[var(--kw-text-muted)] transition-colors"
           type="button"
         >
           <div x-show="!show">
@@ -70,7 +72,7 @@
       >
     </#if>
     <#if invalid?? && message??>
-      <div class="mt-2 text-red-500 text-sm">
+      <div class="text-red-500 text-sm">
         ${message?no_esc}
       </div>
     </#if>

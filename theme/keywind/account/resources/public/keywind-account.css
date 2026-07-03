@@ -1,26 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --kw-primary-50: #eef2ff;
-  --kw-primary-100: #e0e7ff;
-  --kw-primary-200: #c7d2fe;
-  --kw-primary-500: #6366f1;
-  --kw-primary-600: #4f46e5;
-  --kw-primary-700: #4338ca;
+  /* Modern clean palette: zinc + blue accent (matches login theme) */
+  --kw-primary-50: #eff6ff;
+  --kw-primary-100: #dbeafe;
+  --kw-primary-200: #bfdbfe;
+  --kw-primary-500: #3b82f6;
+  --kw-primary-600: #2563eb;
+  --kw-primary-700: #1d4ed8;
   --kw-surface: #ffffff;
-  --kw-surface-muted: #f8fafc;
-  --kw-page-bg: #f1f5f9;
-  --kw-border: #e2e8f0;
-  --kw-border-strong: #cbd5e1;
-  --kw-text: #0f172a;
-  --kw-text-muted: #64748b;
-  --kw-text-subtle: #94a3b8;
+  --kw-surface-muted: #f4f4f5;
+  --kw-page-bg: #fafafa;
+  --kw-border: #e4e4e7;
+  --kw-border-strong: #d4d4d8;
+  --kw-text: #18181b;
+  --kw-text-muted: #71717a;
+  --kw-text-subtle: #a1a1aa;
   --kw-link: var(--kw-primary-600);
   --kw-link-hover: var(--kw-primary-700);
   --kw-primary-button-bg: var(--kw-primary-600);
   --kw-primary-button-bg-hover: var(--kw-primary-700);
   --kw-primary-button-text: #ffffff;
-  --kw-focus: rgb(99 102 241 / 0.25);
+  --kw-focus: rgb(37 99 235 / 0.15);
 
   --pf-global--BackgroundColor--100: var(--kw-page-bg);
   --pf-global--BackgroundColor--light-100: var(--kw-surface);
@@ -45,26 +46,26 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --kw-primary-50: #1e1b4b;
-    --kw-primary-100: #312e81;
-    --kw-primary-200: #4338ca;
-    --kw-primary-500: #818cf8;
-    --kw-primary-600: #6366f1;
-    --kw-primary-700: #a5b4fc;
-    --kw-page-bg: #020617;
-    --kw-surface: #0f172a;
-    --kw-surface-muted: #1e293b;
-    --kw-border: #1e293b;
-    --kw-border-strong: #334155;
-    --kw-text: #f8fafc;
-    --kw-text-muted: #94a3b8;
-    --kw-text-subtle: #64748b;
-    --kw-link: #818cf8;
-    --kw-link-hover: #a5b4fc;
-    --kw-primary-button-bg: #4f46e5;
-    --kw-primary-button-bg-hover: #4338ca;
+    --kw-primary-50: #172554;
+    --kw-primary-100: #1e3a8a;
+    --kw-primary-200: #1e40af;
+    --kw-primary-500: #60a5fa;
+    --kw-primary-600: #3b82f6;
+    --kw-primary-700: #2563eb;
+    --kw-page-bg: #09090b;
+    --kw-surface: #18181b;
+    --kw-surface-muted: #27272a;
+    --kw-border: #27272a;
+    --kw-border-strong: #3f3f46;
+    --kw-text: #fafafa;
+    --kw-text-muted: #a1a1aa;
+    --kw-text-subtle: #71717a;
+    --kw-link: #60a5fa;
+    --kw-link-hover: #3b82f6;
+    --kw-primary-button-bg: #2563eb;
+    --kw-primary-button-bg-hover: #1d4ed8;
     --kw-primary-button-text: #ffffff;
-    --kw-focus: rgb(129 140 248 / 0.32);
+    --kw-focus: rgb(96 165 250 / 0.2);
     color-scheme: dark;
   }
 }
@@ -221,7 +222,7 @@ img[alt="keycloak"] {
   background: var(--kw-surface);
   border: 1px solid var(--kw-border);
   border-radius: 1rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
 }
 
 .pf-c-card__title,
@@ -246,7 +247,7 @@ img[alt="keycloak"] {
 
 .pf-c-button,
 .pf-v5-c-button {
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   font-weight: 500;
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
@@ -301,8 +302,8 @@ img[alt="keycloak"] {
 .pf-v5-c-dropdown__toggle,
 .pf-v5-c-menu-toggle {
   background: var(--kw-surface);
-  border-color: var(--kw-border-strong);
-  border-radius: 0.75rem;
+  border-color: var(--kw-border);
+  border-radius: 1rem;
   color: var(--kw-text);
 }
 
@@ -328,14 +329,16 @@ img[alt="keycloak"] {
 .pf-v5-c-menu-toggle:focus {
   border-color: var(--kw-primary-500);
   box-shadow: 0 0 0 3px var(--kw-focus);
+  outline: none;
 }
 
 .pf-c-alert,
 .pf-v5-c-alert {
   background: var(--kw-surface-muted);
   color: var(--kw-text);
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   box-shadow: none;
+  border: 1px solid var(--kw-border);
 }
 
 .pf-c-table,
@@ -375,7 +378,7 @@ img[alt="keycloak"] {
 .pf-v5-c-select__menu {
   background: var(--kw-surface);
   border: 1px solid var(--kw-border);
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   color: var(--kw-text);
 }
 

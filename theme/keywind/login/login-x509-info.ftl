@@ -10,7 +10,7 @@
   <#elseif section = "form">
     <div>
       <div>${msg("clientCertificate")}</div>
-      <div class="text-secondary-600">
+      <div class="text-[var(--kw-text-muted)]">
         <#if x509.formData.subjectDN??>
           ${(x509.formData.subjectDN!"")}
         <#else>

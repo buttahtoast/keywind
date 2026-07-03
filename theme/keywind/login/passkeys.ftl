@@ -36,7 +36,7 @@
         </p>
       </#if>
       <#list webAuthnAuthenticators.authenticators as authenticator>
-        <div class="bg-[var(--kw-surface-muted)] border border-[var(--kw-border)] p-3 rounded-xl">
+        <div class="bg-[var(--kw-surface-muted)] border border-[var(--kw-border)] p-3 rounded-2xl">
           <div class="font-medium text-[var(--kw-text)]">${kcSanitize(msg("${authenticator.label}"))?no_esc}</div>
           <#if authenticator.transports?? && authenticator.transports.displayNameProperties?has_content>
             <div class="text-[var(--kw-text-muted)] text-sm">

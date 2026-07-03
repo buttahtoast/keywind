@@ -6,41 +6,42 @@
 
 @layer base {
   :root {
-    --kw-primary-50: #eef2ff;
-    --kw-primary-100: #e0e7ff;
-    --kw-primary-200: #c7d2fe;
-    --kw-primary-500: #6366f1;
-    --kw-primary-600: #4f46e5;
-    --kw-primary-700: #4338ca;
+    /* Modern clean palette: zinc neutrals + blue accent */
+    --kw-primary-50: #eff6ff;
+    --kw-primary-100: #dbeafe;
+    --kw-primary-200: #bfdbfe;
+    --kw-primary-500: #3b82f6;
+    --kw-primary-600: #2563eb;
+    --kw-primary-700: #1d4ed8;
     --kw-surface: #ffffff;
-    --kw-surface-muted: #f8fafc;
-    --kw-page-bg: #f1f5f9;
-    --kw-border: #e2e8f0;
-    --kw-border-strong: #cbd5e1;
-    --kw-text: #0f172a;
-    --kw-text-muted: #64748b;
-    --kw-text-subtle: #94a3b8;
-    --kw-focus: rgb(99 102 241 / 0.25);
+    --kw-surface-muted: #f4f4f5;
+    --kw-page-bg: #fafafa;
+    --kw-border: #e4e4e7;
+    --kw-border-strong: #d4d4d8;
+    --kw-text: #18181b;
+    --kw-text-muted: #71717a;
+    --kw-text-subtle: #a1a1aa;
+    --kw-focus: rgb(37 99 235 / 0.15);
     color-scheme: light;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --kw-primary-50: #1e1b4b;
-      --kw-primary-100: #312e81;
-      --kw-primary-200: #4338ca;
-      --kw-primary-500: #818cf8;
-      --kw-primary-600: #6366f1;
-      --kw-primary-700: #a5b4fc;
-      --kw-surface: #0f172a;
-      --kw-surface-muted: #1e293b;
-      --kw-page-bg: #020617;
-      --kw-border: #1e293b;
-      --kw-border-strong: #334155;
-      --kw-text: #f8fafc;
-      --kw-text-muted: #94a3b8;
-      --kw-text-subtle: #64748b;
-      --kw-focus: rgb(129 140 248 / 0.32);
+      --kw-primary-50: #172554;
+      --kw-primary-100: #1e3a8a;
+      --kw-primary-200: #1e40af;
+      --kw-primary-500: #60a5fa;
+      --kw-primary-600: #3b82f6;
+      --kw-primary-700: #2563eb;
+      --kw-surface: #18181b;
+      --kw-surface-muted: #27272a;
+      --kw-page-bg: #09090b;
+      --kw-border: #27272a;
+      --kw-border-strong: #3f3f46;
+      --kw-text: #fafafa;
+      --kw-text-muted: #a1a1aa;
+      --kw-text-subtle: #71717a;
+      --kw-focus: rgb(96 165 250 / 0.2);
       color-scheme: dark;
     }
   }
@@ -52,13 +53,13 @@
   }
 
   .separate {
-    @apply flex items-center text-center;
+    @apply flex items-center text-center text-[var(--kw-text-subtle)];
   }
 
   .separate::after,
   .separate::before {
     content: '';
-    @apply border-b border-slate-200 dark:border-slate-700 flex-1;
+    @apply border-b border-[var(--kw-border)] flex-1;
   }
 
   .separate:not(:empty)::after {

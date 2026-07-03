@@ -9,7 +9,7 @@
       ${kcSanitize(message.summary)?no_esc}
     </#if>
   <#elseif section="form">
-    <div class="space-y-3 text-secondary-600 text-sm">
+    <div class="space-y-3 text-[var(--kw-text-muted)] text-sm">
       <p>
         ${kcSanitize(message.summary)?no_esc}
         <#if requiredActions??>

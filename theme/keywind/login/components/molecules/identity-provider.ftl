@@ -63,7 +63,7 @@
       </#switch>
 
       <a
-        class="${colorClass} bg-[var(--kw-surface)] border border-[var(--kw-border)] flex justify-center py-2.5 rounded-xl transition-colors"
+        class="${colorClass} bg-[var(--kw-surface)] border border-[var(--kw-border)] flex justify-center py-2.5 rounded-2xl transition-colors hover:border-[var(--kw-border-strong)]"
         data-provider="${provider.alias}"
         href="${provider.loginUrl}"
         type="button"

@@ -11,7 +11,7 @@
     </@link.kw>
     <div
       @click.away="open = false"
-      class="absolute bg-[var(--kw-surface)] border border-[var(--kw-border)] bottom-full left-1/2 -translate-x-1/2 max-h-80 mb-2 overflow-y-auto rounded-xl shadow-card dark:shadow-card-dark w-40"
+      class="absolute bg-[var(--kw-surface)] border border-[var(--kw-border)] bottom-full left-1/2 -translate-x-1/2 max-h-80 mb-2 overflow-y-auto rounded-2xl shadow-xl shadow-black/5 dark:shadow-black/20 w-40"
       x-cloak
       x-show="open"
     >

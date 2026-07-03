@@ -2,7 +2,7 @@
 <#import "/components/atoms/link.ftl" as link>
 
 <#macro kw linkHref="" linkTitle="" name="">
-  <div class="bg-[var(--kw-surface-muted)] border border-[var(--kw-border)] flex items-center justify-center mb-4 px-4 py-3 rounded-xl space-x-2">
+  <div class="bg-[var(--kw-surface-muted)] flex items-center justify-between mb-2 px-4 py-2.5 rounded-2xl text-sm">
     <span class="font-medium text-[var(--kw-text)]">${name}</span>
     <@link.kw
       color="primary"
