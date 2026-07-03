@@ -6,7 +6,7 @@
     ${msg("saml.post-form.title")}
   <#elseif section="form">
     <script>window.onload = function() { document.forms[0].submit() }</script>
-    <p class="text-secondary-600 text-sm dark:text-secondary-300">${msg("saml.post-form.message")}</p>
+    <p class="text-secondary-600 text-sm">${msg("saml.post-form.message")}</p>
     <form action="${samlPost.url}" method="post" name="saml-post-binding">
       <#if samlPost.SAMLRequest??>
         <input name="SAMLRequest" type="hidden" value="${samlPost.SAMLRequest}" />
@@ -18,7 +18,7 @@
         <input name="RelayState" type="hidden" value="${samlPost.relayState}" />
       </#if>
       <noscript>
-        <p class="text-secondary-600 text-sm dark:text-secondary-300">${msg("saml.post-form.js-disabled")}</p>
+        <p class="text-secondary-600 text-sm">${msg("saml.post-form.js-disabled")}</p>
         <@button.kw color="primary" type="submit">
           ${msg("doContinue")}
         </@button.kw>

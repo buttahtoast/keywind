@@ -1,13 +1,13 @@
 <#macro kw color="" component="button" size="" rest...>
   <#switch color>
     <#case "primary">
-      <#assign colorClass="bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 dark:focus:ring-primary-400">
+      <#assign colorClass="bg-primary-600 text-white focus:ring-primary-500 hover:bg-primary-700">
       <#break>
     <#case "secondary">
-      <#assign colorClass="bg-secondary-100 text-secondary-600 focus:ring-secondary-600 hover:bg-secondary-200 hover:text-secondary-900 dark:bg-secondary-800 dark:text-secondary-200 dark:hover:bg-secondary-700 dark:hover:text-white dark:focus:ring-secondary-500">
+      <#assign colorClass="bg-white border border-secondary-300 text-secondary-700 focus:ring-primary-500 hover:bg-secondary-50 hover:text-secondary-900">
       <#break>
     <#default>
-      <#assign colorClass="bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 dark:focus:ring-primary-400">
+      <#assign colorClass="bg-primary-600 text-white focus:ring-primary-500 hover:bg-primary-700">
   </#switch>
 
   <#switch size>
@@ -22,7 +22,7 @@
   </#switch>
 
   <${component}
-    class="${colorClass} ${sizeClass} flex justify-center relative rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-secondary-900"
+    class="${colorClass} ${sizeClass} flex font-medium justify-center relative rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white"
 
     <#list rest as attrName, attrValue>
       ${attrName}="${attrValue}"

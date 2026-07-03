@@ -1,5 +1,5 @@
 <#macro kw content="" footer="" header="">
-  <div class="bg-white p-8 rounded-lg space-y-6 dark:bg-secondary-900 dark:shadow-xl dark:shadow-black/20">
+  <div class="bg-white border border-secondary-200 p-8 rounded-lg shadow-none space-y-6">
     <#if header?has_content>
       <div class="space-y-4">
         ${header}

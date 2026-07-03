@@ -9,7 +9,7 @@
     ${msg("doLogIn")}
   <#elseif section="form">
     <@form.kw action=url.loginAction method="post">
-      <p class="text-secondary-600 text-sm dark:text-secondary-300">${msg("otp-reset-description")}</p>
+      <p class="text-secondary-600 text-sm">${msg("otp-reset-description")}</p>
       <div class="space-y-2">
         <#list configuredOtpCredentials.userOtpCredentials as otpCredential>
           <@radio.kw

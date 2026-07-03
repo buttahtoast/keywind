@@ -8,7 +8,7 @@
   <#if section="header">
     ${msg("emailVerifyTitle")}
   <#elseif section="form">
-    <p class="text-secondary-600 text-sm dark:text-secondary-300">
+    <p class="text-secondary-600 text-sm">
       <#if verifyEmail??>
         ${msg("emailVerifyInstruction1", verifyEmail)}
       <#else>

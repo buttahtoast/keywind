@@ -5,7 +5,7 @@
   <#if section="header">
     ${msg("emailLinkIdpTitle", idpDisplayName)}
   <#elseif section="form">
-    <div class="space-y-3 text-secondary-600 text-sm dark:text-secondary-300">
+    <div class="space-y-3 text-secondary-600 text-sm">
       <p>${msg("emailLinkIdp1", idpDisplayName, brokerContext.username, realm.displayName)}</p>
       <p>
         ${msg("emailLinkIdp2")}

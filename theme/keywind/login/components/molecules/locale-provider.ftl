@@ -11,7 +11,7 @@
     </@link.kw>
     <div
       @click.away="open = false"
-      class="absolute bg-white bottom-0 -left-4 max-h-80 mb-6 overflow-y-scroll rounded-lg shadow-lg dark:bg-secondary-900 dark:shadow-black/30"
+      class="absolute bg-white border border-secondary-200 bottom-0 -left-4 max-h-80 mb-6 overflow-y-scroll rounded-lg shadow-none"
       x-cloak
       x-show="open"
     >
