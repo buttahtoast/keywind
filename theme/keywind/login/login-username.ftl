@@ -7,12 +7,19 @@
 <#import "components/atoms/link.ftl" as link>
 <#import "components/molecules/identity-provider.ftl" as identityProvider>
 <#import "features/labels/username.ftl" as usernameLabel>
+<#import "passkeys.ftl" as passkeys>
 
 <#assign usernameLabel><@usernameLabel.kw /></#assign>
+<#assign webAuthnData = webAuthn!{} />
+<#if !webAuthnData?has_content && webauthn??>
+  <#assign webAuthnData = webauthn />
+</#if>
+<#assign webAuthnConditionalUIEnabled = (webAuthnData.enableWebAuthnConditionalUI)!(enableWebAuthnConditionalUI!"") />
 
 <@layout.registrationLayout
   displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??
   displayMessage=!messagesPerField.existsError("username")
+  script=webAuthnConditionalUIEnabled?has_content?then("dist/passkeys.js", "")
   ;
   section
 >
@@ -27,7 +34,7 @@
       >
         <#if !usernameHidden??>
           <@input.kw
-            autocomplete=realm.loginWithEmailAllowed?string("email", "username")
+            autocomplete=webAuthnConditionalUIEnabled?has_content?then("username webauthn", realm.loginWithEmailAllowed?string("email", "username"))
             autofocus=true
             disabled=usernameEditDisabled??
             invalid=messagesPerField.existsError("username")
@@ -53,6 +60,7 @@
           </@button.kw>
         </@buttonGroup.kw>
       </@form.kw>
+      <@passkeys.conditionalUIData />
     </#if>
   <#elseif section="info">
     <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
