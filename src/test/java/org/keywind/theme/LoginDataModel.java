@@ -30,9 +30,9 @@ public class LoginDataModel {
     dataModel.put("totp", createTotpModel());
     dataModel.put("url", createUrlModel());
     dataModel.put("user", createUserModel());
+    dataModel.put("webAuthn", createWebAuthnModel());
     dataModel.put("username", "Username");
     dataModel.put("x509", createX509Model());
-    dataModel.putAll(createWebAuthnModel());
 
     return dataModel;
   }
@@ -319,17 +319,25 @@ public class LoginDataModel {
     authenticators.put("authenticators", List.of(authenticator));
 
     Map<String, Object> webAuthn = new HashMap<>();
+    webAuthn.put("attestationConveyancePreference", "not specified");
     webAuthn.put("authenticatorAttachment", "platform");
     webAuthn.put("authenticators", authenticators);
     webAuthn.put("challenge", "challenge");
     webAuthn.put("execution", "execution");
     webAuthn.put("createTimeout", "60000");
     webAuthn.put("enableWebAuthnConditionalUI", true);
+    webAuthn.put("excludeCredentialIds", "");
     webAuthn.put("isUserIdentified", "true");
     webAuthn.put("mediation", "conditional");
+    webAuthn.put("requireResidentKey", "not specified");
     webAuthn.put("rpId", "https://webauthn.me");
+    webAuthn.put("rpEntityName", "Keywind");
     webAuthn.put("shouldDisplayAuthenticators", true);
+    webAuthn.put("signatureAlgorithms", "");
+    webAuthn.put("userId", "userid");
     webAuthn.put("userVerification", "preferred");
+    webAuthn.put("userVerificationRequirement", "preferred");
+    webAuthn.put("username", "Username");
 
     return webAuthn;
   }

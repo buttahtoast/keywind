@@ -10,11 +10,13 @@
 <#import "passkeys.ftl" as passkeys>
 
 <#assign usernameLabel><@usernameLabel.kw /></#assign>
+<#assign webAuthnData = webAuthn!{} />
+<#assign webAuthnConditionalUIEnabled = (webAuthnData.enableWebAuthnConditionalUI)!(enableWebAuthnConditionalUI!"") />
 
 <@layout.registrationLayout
   displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??
   displayMessage=!messagesPerField.existsError("username", "password")
-  script=enableWebAuthnConditionalUI?has_content?then("dist/passkeys.js", "")
+  script=webAuthnConditionalUIEnabled?has_content?then("dist/passkeys.js", "")
   ;
   section
 >
@@ -33,7 +35,7 @@
           value="<#if auth.selectedCredential?has_content>${auth.selectedCredential}</#if>"
         >
         <@input.kw
-          autocomplete=enableWebAuthnConditionalUI?has_content?then("username webauthn", realm.loginWithEmailAllowed?string("email", "username"))
+          autocomplete=webAuthnConditionalUIEnabled?has_content?then("username webauthn", realm.loginWithEmailAllowed?string("email", "username"))
           autofocus=true
           disabled=usernameEditDisabled??
           invalid=messagesPerField.existsError("username", "password")

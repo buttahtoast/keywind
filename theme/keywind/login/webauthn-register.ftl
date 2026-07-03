@@ -1,6 +1,7 @@
 <#import "template.ftl" as layout>
 <#import "components/atoms/button.ftl" as button>
 <#import "components/atoms/button-group.ftl" as buttonGroup>
+<#assign webAuthnData = webAuthn!{} />
 
 <@layout.registrationLayout script="dist/webAuthnRegister.js"; section>
   <#if section="title">
@@ -36,19 +37,19 @@
 <script>
   document.addEventListener('alpine:init', () => {
     Alpine.store('webAuthnRegister', {
-      attestationConveyancePreference: '${attestationConveyancePreference}',
-      authenticatorAttachment: '${authenticatorAttachment}',
-      challenge: '${challenge}',
-      createTimeout: '${createTimeout}',
-      excludeCredentialIds: '${excludeCredentialIds}',
-      requireResidentKey: '${requireResidentKey}',
-      rpEntityName: '${rpEntityName}',
-      rpId: '${rpId}',
-      signatureAlgorithms: '${signatureAlgorithms}',
-      unsupportedBrowserText: '${msg("webauthn-unsupported-browser-text")?no_esc}',
-      userId: '${userid}',
-      userVerificationRequirement: '${userVerificationRequirement}',
-      username: '${username}',
+      attestationConveyancePreference: '${((webAuthnData.attestationConveyancePreference)!(attestationConveyancePreference!""))?string?js_string}',
+      authenticatorAttachment: '${((webAuthnData.authenticatorAttachment)!(authenticatorAttachment!""))?string?js_string}',
+      challenge: '${((webAuthnData.challenge)!(challenge!""))?string?js_string}',
+      createTimeout: '${((webAuthnData.createTimeout)!(createTimeout!""))?string?js_string}',
+      excludeCredentialIds: '${((webAuthnData.excludeCredentialIds)!(excludeCredentialIds!""))?string?js_string}',
+      requireResidentKey: '${((webAuthnData.requireResidentKey)!(requireResidentKey!""))?string?js_string}',
+      rpEntityName: '${((webAuthnData.rpEntityName)!(rpEntityName!""))?string?js_string}',
+      rpId: '${((webAuthnData.rpId)!(rpId!""))?string?js_string}',
+      signatureAlgorithms: '${((webAuthnData.signatureAlgorithms)!(signatureAlgorithms!""))?string?js_string}',
+      unsupportedBrowserText: '${msg("webauthn-unsupported-browser-text")?js_string}',
+      userId: '${((webAuthnData.userid)!(webAuthnData.userId)!(userid!""))?string?js_string}',
+      userVerificationRequirement: '${((webAuthnData.userVerificationRequirement)!(userVerificationRequirement!""))?string?js_string}',
+      username: '${((webAuthnData.username)!(username!""))?string?js_string}',
     })
   })
 </script>
