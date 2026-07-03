@@ -1,5 +1,5 @@
 <#macro kw>
-  <div class="flex justify-around">
+  <nav class="flex items-center justify-center">
     <#nested>
-  </div>
+  </nav>
 </#macro>

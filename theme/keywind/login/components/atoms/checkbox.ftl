@@ -3,7 +3,7 @@
     <input
       <#if checked>checked</#if>
 
-      class="border-secondary-300 h-4 rounded text-primary-600 w-4 focus:ring-primary-200 focus:ring-opacity-100"
+      class="border-[var(--kw-border-strong)] h-4 rounded text-primary-600 w-4 focus:ring-[var(--kw-focus)]"
       id="${name}"
       name="${name}"
       type="checkbox"
@@ -12,7 +12,7 @@
         ${attrName}="${attrValue}"
       </#list>
     >
-    <label class="ml-2 text-secondary-700 text-sm" for="${name}">
+    <label class="ml-2 text-[var(--kw-text-muted)] text-sm" for="${name}">
       ${label}
     </label>
   </div>

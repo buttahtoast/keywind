@@ -20,7 +20,7 @@
 >
   <#assign cardHeader>
     <@logo.kw>
-      ${kcSanitize(msg("loginTitleHtml", (realm.displayNameHtml!"")))?no_esc}
+      ${kcSanitize((realm.displayName)!(realm.displayNameHtml)!(realm.name)!"")?no_esc}
     </@logo.kw>
     <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
       <@heading.kw>
@@ -44,14 +44,14 @@
     </#if>
     <#nested "form">
     <#if displayRequiredFields>
-      <p class="text-secondary-600 text-sm">
+      <p class="text-[var(--kw-text-muted)] text-sm">
         * ${msg("requiredFields")}
       </p>
     </#if>
     <#if auth?has_content && auth.showTryAnotherWayLink() && showAnotherWayIfPresent>
       <form action="${url.loginAction}" method="post">
         <input name="tryAnotherWay" type="hidden" value="on" />
-        <@button.kw color="secondary" type="submit">
+        <@button.kw color="ghost" type="submit">
           ${msg("doTryAnotherWay")}
         </@button.kw>
       </form>
@@ -72,12 +72,12 @@
     <@body.kw>
       <@container.kw>
         <@card.kw content=cardContent footer=cardFooter header=cardHeader />
-        <@nav.kw>
-          <#nested "nav">
-          <#if realm.internationalizationEnabled && locale.supported?size gt 1>
+        <#if realm.internationalizationEnabled && locale.supported?size gt 1>
+          <@nav.kw>
+            <#nested "nav">
             <@localeProvider.kw currentLocale=locale.current locales=locale.supported />
-          </#if>
-        </@nav.kw>
+          </@nav.kw>
+        </#if>
       </@container.kw>
     </@body.kw>
   </html>

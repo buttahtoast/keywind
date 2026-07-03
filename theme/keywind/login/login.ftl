@@ -15,11 +15,12 @@
   <#assign webAuthnData = webauthn />
 </#if>
 <#assign webAuthnConditionalUIEnabled = (webAuthnData.enableWebAuthnConditionalUI)!(enableWebAuthnConditionalUI!"") />
+<#assign webAuthnEnabled = webAuthnData.challenge?has_content || webAuthnConditionalUIEnabled?has_content />
 
 <@layout.registrationLayout
   displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??
   displayMessage=!messagesPerField.existsError("username", "password")
-  script=webAuthnConditionalUIEnabled?has_content?then("dist/passkeys.js", "")
+  script=webAuthnEnabled?has_content?then("dist/passkeys.js", "")
   ;
   section
 >
@@ -76,11 +77,11 @@
           </@button.kw>
         </@buttonGroup.kw>
       </@form.kw>
-      <@passkeys.conditionalUIData />
+      <@passkeys.homepagePasskey />
     </#if>
   <#elseif section="info">
     <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
-      <div class="text-center">
+      <div class="text-center text-[var(--kw-text-muted)] text-sm">
         ${msg("noAccount")}
         <@link.kw color="primary" href=url.registrationUrl>
           ${msg("doRegister")}

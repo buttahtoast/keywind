@@ -56,7 +56,7 @@
     <@passkeys.store unsupportedBrowserMessage="passkey-unsupported-browser-text" />
   <#elseif section="info">
     <#if realm.registrationAllowed && !registrationDisabled??>
-      <div class="text-center">
+      <div class="text-center text-[var(--kw-text-muted)] text-sm">
         ${msg("noAccount")}
         <@link.kw color="primary" href=url.registrationUrl>
           ${msg("doRegister")}

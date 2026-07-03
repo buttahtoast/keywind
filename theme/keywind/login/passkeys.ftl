@@ -1,4 +1,5 @@
 <#import "components/atoms/button.ftl" as button>
+<#import "/assets/icons/passkey.ftl" as passkeyIcon>
 <#assign webAuthnData = webAuthn!{} />
 <#if !webAuthnData?has_content && webauthn??>
   <#assign webAuthnData = webauthn />
@@ -6,6 +7,7 @@
 <#assign webAuthnAuthenticators = (webAuthnData.authenticators)!(authenticators!"") />
 <#assign webAuthnShouldDisplayAuthenticators = (webAuthnData.shouldDisplayAuthenticators)!(shouldDisplayAuthenticators!false) />
 <#assign webAuthnConditionalUIEnabled = (webAuthnData.enableWebAuthnConditionalUI)!(enableWebAuthnConditionalUI!"") />
+<#assign webAuthnEnabled = webAuthnData.challenge?has_content || webAuthnConditionalUIEnabled?has_content />
 
 <#macro hiddenForms>
   <form action="${url.loginAction}" method="post" x-ref="webAuthnForm">
@@ -29,15 +31,15 @@
   <#if webAuthnAuthenticators?has_content && webAuthnShouldDisplayAuthenticators>
     <div class="space-y-3">
       <#if webAuthnAuthenticators.authenticators?size gt 1>
-        <p class="text-secondary-600 text-sm">
+        <p class="text-[var(--kw-text-muted)] text-sm">
           ${kcSanitize(msg(titleMessage))?no_esc}
         </p>
       </#if>
       <#list webAuthnAuthenticators.authenticators as authenticator>
-        <div class="rounded-md border border-secondary-200 p-3">
-          <div class="font-medium text-secondary-900">${kcSanitize(msg("${authenticator.label}"))?no_esc}</div>
+        <div class="bg-[var(--kw-surface-muted)] border border-[var(--kw-border)] p-3 rounded-xl">
+          <div class="font-medium text-[var(--kw-text)]">${kcSanitize(msg("${authenticator.label}"))?no_esc}</div>
           <#if authenticator.transports?? && authenticator.transports.displayNameProperties?has_content>
-            <div class="text-secondary-600 text-sm">
+            <div class="text-[var(--kw-text-muted)] text-sm">
               <#list authenticator.transports.displayNameProperties as nameProperty>
                 <span>${kcSanitize(msg("${nameProperty!}"))?no_esc}</span>
                 <#if nameProperty?has_next>
@@ -46,7 +48,7 @@
               </#list>
             </div>
           </#if>
-          <div class="text-secondary-600 text-sm">
+          <div class="text-[var(--kw-text-muted)] text-sm">
             <span>${kcSanitize(msg(createdAtMessage))?no_esc}</span>
             <span>${kcSanitize(authenticator.createdAt)?no_esc}</span>
           </div>
@@ -73,13 +75,30 @@
   </script>
 </#macro>
 
+<#macro homepagePasskey>
+  <#if webAuthnEnabled>
+    <div x-data="passkeys" x-init="initPasskeyConditionalUI">
+      <@hiddenForms />
+      <div class="separate text-[var(--kw-text-subtle)] text-sm">
+        ${kcSanitize(msg("passkey-login-title"))?no_esc}
+      </div>
+      <@button.kw @click="authenticatePasskey" color="secondary" type="button">
+        <@passkeyIcon.kw />
+        ${kcSanitize(msg("passkey-doAuthenticate"))?no_esc}
+      </@button.kw>
+    </div>
+    <@store unsupportedBrowserMessage="passkey-unsupported-browser-text" />
+  </#if>
+</#macro>
+
 <#macro conditionalUIData>
-  <#if webAuthnConditionalUIEnabled?has_content>
+  <#if webAuthnEnabled>
     <div x-data="passkeys" x-init="initPasskeyConditionalUI">
       <@hiddenForms />
       <div x-cloak x-show="passkeyFallbackVisible" class="mt-4">
         <@button.kw @click="authenticatePasskey" color="secondary" type="button">
-          ${kcSanitize(msg("webauthn-doAuthenticate"))?no_esc}
+          <@passkeyIcon.kw />
+          ${kcSanitize(msg("passkey-doAuthenticate"))?no_esc}
         </@button.kw>
       </div>
     </div>
