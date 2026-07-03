@@ -94,21 +94,63 @@ a:hover {
   color: var(--kw-link-hover);
 }
 
-/* Hide Keycloak branding */
+/* ============================================
+   Remove all Keycloak branding / banners
+   ============================================ */
+
+/* Hide Keycloak logo images and brands (login + account) */
 .pf-c-brand img,
 .pf-v5-c-brand img,
 .brand img,
 .keycloak__brand img,
-img[alt="Keycloak"],
-img[alt="keycloak"] {
+img[alt*="keycloak" i],
+img[title*="keycloak" i],
+img[src*="keycloak" i],
+svg[aria-label*="keycloak" i] {
   display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .pf-c-brand,
 .pf-v5-c-brand,
 .brand,
-.keycloak__brand {
+.keycloak__brand,
+.pf-v5-c-masthead__brand,
+.pf-v5-c-masthead .pf-v5-c-brand,
+.pf-v5-c-masthead .pf-v5-c-masthead-brand {
   background-image: none !important;
+  display: none !important;
+}
+
+/* Masthead (top banner bar in Account Console v3) — clean, no Keycloak branding */
+.pf-v5-c-masthead {
+  background: var(--kw-surface);
+  border-bottom: 1px solid var(--kw-border);
+  box-shadow: none;
+}
+
+/* Make masthead feel less like a "banner" and more part of the app */
+.pf-v5-c-masthead {
+  min-height: 2.75rem;
+}
+
+.pf-v5-c-masthead .pf-v5-c-brand,
+.pf-v5-c-masthead .pf-v5-c-masthead-brand,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:first-of-type,
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:first-of-type {
+  display: none !important;
+  width: 0;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Collapse any remaining brand containers in headers */
+.pf-v5-c-masthead__brand,
+.pf-c-page__header-brand {
+  display: none !important;
 }
 
 .pf-c-page,
@@ -118,7 +160,8 @@ img[alt="keycloak"] {
 }
 
 .pf-c-page__header,
-.pf-v5-c-page__header {
+.pf-v5-c-page__header,
+.pf-v5-c-masthead {
   background: var(--kw-surface);
   border-bottom: 1px solid var(--kw-border);
   box-shadow: none;
@@ -127,14 +170,17 @@ img[alt="keycloak"] {
 .pf-c-page__header-brand,
 .pf-c-page__header-tools,
 .pf-v5-c-page__header-brand,
-.pf-v5-c-page__header-tools {
-  min-height: 4rem;
+.pf-v5-c-page__header-tools,
+.pf-v5-c-masthead .pf-v5-c-toolbar {
+  min-height: 3rem;
 }
 
+/* Remove any default logo sizing */
 .pf-c-brand.brand,
 .pf-v5-c-brand.brand,
 .brand {
-  max-height: 2rem;
+  max-height: 0;
+  display: none;
 }
 
 .pf-c-page__sidebar,
@@ -430,4 +476,19 @@ footer a[href*="keycloak.org"],
 .keycloak__footer,
 .pf-c-page__main-section a[href*="keycloak.org"] {
   display: none !important;
+}
+
+/* Extra aggressive de-branding for any remaining Keycloak references */
+[data-testid*="keycloak" i],
+[aria-label*="keycloak" i],
+[title*="keycloak" i],
+.pf-v5-c-page__main a[href*="keycloak"],
+.pf-v5-c-page__main-section a[href*="keycloak"] {
+  display: none !important;
+}
+
+/* Make the top masthead toolbar items (user menu) stay but without left brand padding */
+.pf-v5-c-masthead .pf-v5-c-toolbar,
+.pf-v5-c-masthead .pf-v5-c-toolbar__content {
+  padding-left: 0.75rem !important;
 }
