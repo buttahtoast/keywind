@@ -70,3 +70,140 @@
     @apply mr-3;
   }
 }
+
+/* =========================================
+   Clean animated landscape background
+   Subtle, slow, elegant — for login pages
+   ========================================= */
+
+.landscape {
+  pointer-events: none;
+  /* Clean soft sky */
+  background: linear-gradient(
+    180deg,
+    #c7d2fe 0%,
+    #e0e7ff 32%,
+    #f0f4f8 68%,
+    #f8fafc 100%
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  .landscape {
+    background: linear-gradient(
+      180deg,
+      #0f172a 0%,
+      #1e293b 35%,
+      #1e293b 70%,
+      #0f172a 100%
+    );
+  }
+}
+
+/* Sun / glow - subtle warm accent */
+.landscape .sun-glow {
+  fill: #facc15;
+  opacity: 0.18;
+}
+
+.landscape .sun {
+  fill: #fef08c;
+  opacity: 0.55;
+}
+
+@media (prefers-color-scheme: dark) {
+  .landscape .sun-glow {
+    fill: #854d0e;
+    opacity: 0.08;
+  }
+  .landscape .sun {
+    fill: #fde047;
+    opacity: 0.2;
+  }
+}
+
+/* Clouds - very soft and clean */
+.landscape .cloud {
+  fill: #f8fafc;
+  opacity: 0.65;
+  animation: cloud-drift linear infinite;
+}
+
+.landscape .cloud-slow {
+  animation-duration: 92s;
+}
+
+.landscape .cloud-medium {
+  animation-duration: 64s;
+}
+
+.landscape .cloud-fast {
+  animation-duration: 48s;
+}
+
+@media (prefers-color-scheme: dark) {
+  .landscape .cloud {
+    fill: #64748b;
+    opacity: 0.12;
+  }
+}
+
+/* Rolling hills - layered for depth, very clean */
+.landscape .hill-far {
+  fill: #64748b;
+  opacity: 0.32;
+}
+
+.landscape .hill-mid {
+  fill: #475569;
+  opacity: 0.42;
+}
+
+.landscape .hill-front {
+  fill: #334155;
+  opacity: 0.55;
+}
+
+@media (prefers-color-scheme: dark) {
+  .landscape .hill-far {
+    fill: #475569;
+    opacity: 0.38;
+  }
+  .landscape .hill-mid {
+    fill: #334155;
+    opacity: 0.48;
+  }
+  .landscape .hill-front {
+    fill: #1e293b;
+    opacity: 0.65;
+  }
+}
+
+/* Cloud drift animation - slow and peaceful */
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-260px);
+  }
+  to {
+    transform: translateX(1520px);
+  }
+}
+
+/* Optional very subtle mist layer for extra cleanliness */
+.landscape .mist {
+  fill: #f8fafc;
+  opacity: 0.045;
+  animation: mist-drift 135s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .landscape .mist {
+    fill: #64748b;
+    opacity: 0.03;
+  }
+}
+
+@keyframes mist-drift {
+  from { transform: translateX(-80px); }
+  to { transform: translateX(80px); }
+}

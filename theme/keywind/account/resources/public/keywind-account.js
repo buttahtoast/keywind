@@ -71,4 +71,157 @@
   // Run text cleanup after initial render
   setTimeout(removeKeycloakText, 800);
   setTimeout(removeKeycloakText, 1800);
+
+  /**
+   * Beautify user avatar + name in masthead.
+   * - Replaces ugly/default avatars (when no real profile picture) with clean initials.
+   * - Keeps real user pictures.
+   * - Improves appearance of First/LastName display area.
+   */
+  function beautifyUserProfile() {
+    var masthead = document.querySelector('.pf-v5-c-masthead');
+    if (!masthead) return;
+
+    var toggles = masthead.querySelectorAll(
+      '.pf-v5-c-dropdown__toggle, .pf-v5-c-menu-toggle, .pf-v5-c-toolbar__group:last-of-type button, .pf-v5-c-toolbar__item:last-of-type button'
+    );
+
+    toggles.forEach(function (toggle) {
+      if (!toggle || toggle.dataset.kwStyled === '1') return;
+
+      // Extract name (prefer direct child spans or visible text)
+      var nameSpan = toggle.querySelector('span');
+      var nameText = (nameSpan ? nameSpan.textContent : toggle.textContent || '').trim();
+
+      if (!nameText || nameText.length < 2 || /keycloak/i.test(nameText)) return;
+
+      // Compute nice initials from First Last name
+      var parts = nameText.split(/\s+/).filter(function (p) { return p.length > 0; });
+      var initials = '';
+      if (parts.length >= 2) {
+        initials = (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+      } else {
+        initials = nameText.substring(0, 2).toUpperCase();
+      }
+
+      // Find avatar candidates
+      var avatars = toggle.querySelectorAll('img, svg, .pf-v5-c-avatar, [class*="avatar"], [class*="pf-c-avatar"]');
+
+      var hasRealAvatar = false;
+
+      avatars.forEach(function (av) {
+        var isImg = av.tagName === 'IMG';
+        var src = isImg ? (av.getAttribute('src') || '') : '';
+
+        // Heuristic: treat as "real picture" if it has a decent external-looking src
+        var looksLikeRealPic = isImg && src.length > 10 &&
+          !/^(data:|blob:)?$/.test(src) &&
+          !/keycloak|default|placeholder|silhouette|user\.svg|gravatar.*(d=404|d=mp)/i.test(src);
+
+        if (looksLikeRealPic) {
+          hasRealAvatar = true;
+          // Still ensure nice styling (CSS handles most)
+          av.style.borderRadius = '9999px';
+          av.style.objectFit = 'cover';
+        } else {
+          // Hide the ugly default avatar / icon
+          av.style.display = 'none';
+
+          // Inject a clean initials avatar (only once)
+          if (!toggle.querySelector('.kw-user-initials')) {
+            var init = document.createElement('div');
+            init.className = 'kw-user-initials';
+            init.textContent = initials;
+            init.setAttribute('aria-hidden', 'true');
+            init.style.cssText = [
+              'display:flex',
+              'align-items:center',
+              'justify-content:center',
+              'width:28px',
+              'height:28px',
+              'min-width:28px',
+              'min-height:28px',
+              'border-radius:9999px',
+              'background:var(--kw-primary-600)',
+              'color:#fff',
+              'font-size:11.5px',
+              'font-weight:600',
+              'letter-spacing:0.5px',
+              'flex-shrink:0',
+              'border:1px solid var(--kw-border-strong)',
+              'box-shadow:0 1px 2px rgb(0 0 0 / 0.1)'
+            ].join(';') + ';';
+            // Insert at the beginning of the toggle (before name)
+            if (toggle.firstChild) {
+              toggle.insertBefore(init, toggle.firstChild);
+            } else {
+              toggle.appendChild(init);
+            }
+          }
+        }
+      });
+
+      // If no avatars at all (or all hidden), still ensure we have a nice initials one
+      if (!hasRealAvatar && !toggle.querySelector('.kw-user-initials') && nameText) {
+        var init = document.createElement('div');
+        init.className = 'kw-user-initials';
+        init.textContent = initials;
+        init.setAttribute('aria-hidden', 'true');
+        init.style.cssText = [
+          'display:flex',
+          'align-items:center',
+          'justify-content:center',
+          'width:28px',
+          'height:28px',
+          'min-width:28px',
+          'min-height:28px',
+          'border-radius:9999px',
+          'background:var(--kw-primary-600)',
+          'color:#fff',
+          'font-size:11.5px',
+          'font-weight:600',
+          'letter-spacing:0.5px',
+          'flex-shrink:0',
+          'border:1px solid var(--kw-border-strong)',
+          'box-shadow:0 1px 2px rgb(0 0 0 / 0.1)'
+        ].join(';') + ';';
+        toggle.insertBefore(init, toggle.firstChild || null);
+      }
+
+      toggle.dataset.kwStyled = '1';
+    });
+  }
+
+  // Run beautify multiple times (SPA renders in waves)
+  function scheduleBeautify() {
+    beautifyUserProfile();
+    setTimeout(beautifyUserProfile, 650);
+    setTimeout(beautifyUserProfile, 1400);
+    setTimeout(beautifyUserProfile, 2400);
+  }
+
+  // Initial + after load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleBeautify);
+  } else {
+    scheduleBeautify();
+  }
+
+  // Observe masthead for SPA re-renders / user data loading
+  var mastObserver = new MutationObserver(function () {
+    beautifyUserProfile();
+  });
+
+  // Start observing when masthead appears
+  var mastCheck = setInterval(function () {
+    var mast = document.querySelector('.pf-v5-c-masthead');
+    if (mast) {
+      clearInterval(mastCheck);
+      mastObserver.observe(mast, { childList: true, subtree: true });
+      beautifyUserProfile();
+    }
+  }, 300);
+
+  // Final safety net
+  setTimeout(beautifyUserProfile, 3500);
 })();

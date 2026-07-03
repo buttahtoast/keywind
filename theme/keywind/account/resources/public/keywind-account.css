@@ -212,6 +212,28 @@ svg[aria-label*="keycloak" i] {
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
+/* Nicer active nav item (simple left accent + bg) */
+.pf-v5-c-nav__link.pf-m-current,
+.pf-v5-c-nav__link--m-current,
+.pf-v5-c-nav__link[aria-current="page"] {
+  background-color: var(--kw-primary-50) !important;
+  color: var(--kw-primary-600) !important;
+  font-weight: 600;
+  position: relative;
+}
+
+.pf-v5-c-nav__link.pf-m-current::before,
+.pf-v5-c-nav__link--m-current::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: var(--kw-primary-600);
+  border-radius: 0 2px 2px 0;
+}
+
 .pf-c-nav__link::before,
 .pf-c-nav__link::after,
 .pf-v5-c-nav__link::before,
@@ -491,4 +513,104 @@ footer a[href*="keycloak.org"],
 .pf-v5-c-masthead .pf-v5-c-toolbar,
 .pf-v5-c-masthead .pf-v5-c-toolbar__content {
   padding-left: 0.75rem !important;
+}
+
+/* ============================================
+   Beautiful User Name + Avatar (top right masthead)
+   Clean, modern, simple pill-style user menu
+   ============================================ */
+
+/* Right-side user dropdown toggle container */
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type,
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type {
+  display: flex;
+  align-items: center;
+}
+
+/* The clickable user button: avatar + name + chevron */
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type .pf-v5-c-button,
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0.2rem 0.65rem 0.2rem 0.3rem !important;
+  border-radius: 9999px !important;
+  background: transparent !important;
+  color: var(--kw-text) !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  line-height: 1.1;
+  min-height: 2rem;
+  border: none !important;
+  box-shadow: none !important;
+  transition: background-color 0.12s ease, transform 0.05s ease;
+}
+
+/* Subtle hover for the whole user pill */
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle:hover,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle:hover,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type .pf-v5-c-button:hover,
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button:hover {
+  background-color: var(--kw-surface-muted) !important;
+  color: var(--kw-text) !important;
+}
+
+/* Avatar (image or placeholder) - clean circle */
+.pf-v5-c-masthead img,
+.pf-v5-c-masthead .pf-v5-c-avatar,
+.pf-v5-c-masthead [class*="avatar"],
+.pf-v5-c-masthead .pf-c-avatar {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  border-radius: 9999px !important;
+  object-fit: cover !important;
+  border: 1px solid var(--kw-border-strong) !important;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+  flex-shrink: 0;
+  background-color: var(--kw-surface-muted);
+  display: inline-block;
+}
+
+/* User name text next to avatar */
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle span,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle span,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type span:not([class*="icon"]):not([class*="caret"]),
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type span {
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  color: var(--kw-text) !important;
+  white-space: nowrap;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+/* Dropdown chevron / caret icon - subtle */
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle-icon,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle svg,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type svg {
+  width: 14px !important;
+  height: 14px !important;
+  opacity: 0.55;
+  margin-left: 0.1rem;
+  flex-shrink: 0;
+}
+
+/* Improve focus ring on user menu */
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle:focus-visible,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px var(--kw-focus) !important;
+}
+
+/* Our injected clean initials avatar (used when no profile picture) */
+.pf-v5-c-masthead .kw-user-initials {
+  flex-shrink: 0;
+  font-family: inherit;
+  user-select: none;
 }
