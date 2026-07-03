@@ -83,7 +83,7 @@
     if (!masthead) return;
 
     var toggles = masthead.querySelectorAll(
-      '.pf-v5-c-dropdown__toggle, .pf-v5-c-menu-toggle, .pf-v5-c-toolbar__group:last-of-type button, .pf-v5-c-toolbar__item:last-of-type button'
+      '.pf-v5-c-dropdown__toggle, .pf-v5-c-menu-toggle, .pf-v5-c-toolbar__group:last-of-type button, .pf-v5-c-toolbar__item:last-of-type button, [id*="OUIA-Generated-MenuToggle"], [data-ouia-component-id*="MenuToggle"]'
     );
 
     toggles.forEach(function (toggle) {

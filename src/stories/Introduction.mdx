@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# Keywind Storybook
+
+This Storybook lets you develop and test the Keywind Keycloak theme components locally in isolation.
+
+## Getting Started
+
+```bash
+pnpm storybook
+# or
+npm run storybook
+```
+
+Open http://localhost:6006
+
+## What you can find here
+
+- **Atoms**: Low level building blocks (Button, Input, Alert, Card, Checkbox...)
+- **Molecules**: Composed components (Username bar, Identity Providers)
+- **Examples**: Full page compositions that mimic real login screens
+
+## Notes
+
+- Components are rendered using the same Tailwind + CSS variable system as the real theme.
+- Alpine.js is available for interactive elements (password visibility toggles, etc.).
+- Use the toolbar to switch light/dark backgrounds.
+- These stories mirror the FreeMarker macros found in `theme/keywind/login/components/`.
+
+## Related
+
+- Actual templates live in `theme/keywind/login/`
+- Static full-page HTML previews are also available in the `html/login/` folder (use with `pnpm dev`)

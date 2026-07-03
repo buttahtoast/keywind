@@ -98,6 +98,33 @@ You can update Keywind components in your own child theme. For example, create a
 </#macro>
 ```
 
+## Local Development & Testing
+
+### Storybook (recommended for component testing)
+
+Storybook lets you browse and interact with all atoms, molecules, and example pages in isolation with live reload.
+
+```bash
+pnpm install
+pnpm storybook
+```
+
+Then open http://localhost:6006.
+
+- View individual components with controls for variants (color, size, states).
+- Test interactive elements (password toggles use Alpine.js).
+- Quickly switch light/dark previews.
+
+### Static HTML Previews
+
+You can also use the pre-generated full page HTML files together with the Vite dev server:
+
+```bash
+pnpm dev
+```
+
+Then open any file inside `html/login/*.html` in your browser. These load the live CSS and JS from Vite.
+
 ## Build
 
 When you're ready to deploy your own theme, run the build command to generate a static production build.

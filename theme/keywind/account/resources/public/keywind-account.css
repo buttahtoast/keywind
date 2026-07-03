@@ -514,6 +514,19 @@ footer a[href*="keycloak.org"],
 .pf-v5-c-masthead .pf-v5-c-toolbar__content {
   padding-left: 0.75rem !important;
   padding-right: 0.75rem !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-end !important; /* ensure remaining content (user menu) is on the right */
+}
+
+/* Push the group containing the user menu (OUIA-Generated-MenuToggle-*) all the way to the right */
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:has(.pf-v5-c-menu-toggle),
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:has([id*="MenuToggle"]),
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:has([data-ouia-component-id*="MenuToggle"]),
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:has(.pf-v5-c-menu-toggle),
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:has([id*="MenuToggle"]),
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:has([data-ouia-component-id*="MenuToggle"]) {
+  margin-left: auto !important;
 }
 
 /* ============================================
@@ -521,9 +534,11 @@ footer a[href*="keycloak.org"],
    Clean, modern, simple pill-style user menu
    ============================================ */
 
-/* Right-side user dropdown toggle container */
+/* Right-side user dropdown toggle container (also catch last-of-type and OUIA generated MenuToggle) */
 .pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type,
-.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type {
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:has([id*="OUIA-Generated-MenuToggle"]),
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:has([id*="OUIA-Generated-MenuToggle"]) {
   display: flex;
   align-items: center;
   margin-left: auto !important;
@@ -533,7 +548,9 @@ footer a[href*="keycloak.org"],
 .pf-v5-c-masthead .pf-v5-c-dropdown__toggle,
 .pf-v5-c-masthead .pf-v5-c-menu-toggle,
 .pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type .pf-v5-c-button,
-.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button {
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button,
+.pf-v5-c-masthead [id*="OUIA-Generated-MenuToggle"],
+.pf-v5-c-masthead [data-ouia-component-id*="MenuToggle"] {
   display: inline-flex !important;
   align-items: center !important;
   gap: 0.5rem !important;
@@ -555,7 +572,9 @@ footer a[href*="keycloak.org"],
 .pf-v5-c-masthead .pf-v5-c-dropdown__toggle:hover,
 .pf-v5-c-masthead .pf-v5-c-menu-toggle:hover,
 .pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type .pf-v5-c-button:hover,
-.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button:hover {
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button:hover,
+.pf-v5-c-masthead [id*="OUIA-Generated-MenuToggle"]:hover,
+.pf-v5-c-masthead [data-ouia-component-id*="MenuToggle"]:hover {
   background-color: var(--kw-surface-muted) !important;
   border-color: var(--kw-primary-500) !important;
   transform: translateY(-0.5px);
@@ -583,7 +602,9 @@ footer a[href*="keycloak.org"],
 .pf-v5-c-masthead .pf-v5-c-dropdown__toggle span,
 .pf-v5-c-masthead .pf-v5-c-menu-toggle span,
 .pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type span:not([class*="icon"]):not([class*="caret"]),
-.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type span {
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type span,
+.pf-v5-c-masthead [id*="OUIA-Generated-MenuToggle"] span,
+.pf-v5-c-masthead [data-ouia-component-id*="MenuToggle"] span {
   font-size: 0.8125rem !important;
   font-weight: 500 !important;
   color: var(--kw-text) !important;
@@ -598,7 +619,9 @@ footer a[href*="keycloak.org"],
 .pf-v5-c-masthead .pf-v5-c-dropdown__toggle:hover span,
 .pf-v5-c-masthead .pf-v5-c-menu-toggle:hover span,
 .pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type:hover span:not([class*="icon"]):not([class*="caret"]),
-.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type:hover span {
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type:hover span,
+.pf-v5-c-masthead [id*="OUIA-Generated-MenuToggle"]:hover span,
+.pf-v5-c-masthead [data-ouia-component-id*="MenuToggle"]:hover span {
   color: var(--kw-primary-600) !important;
 }
 
@@ -612,7 +635,9 @@ footer a[href*="keycloak.org"],
 
 /* Improve focus ring on user menu */
 .pf-v5-c-masthead .pf-v5-c-dropdown__toggle:focus-visible,
-.pf-v5-c-masthead .pf-v5-c-menu-toggle:focus-visible {
+.pf-v5-c-masthead .pf-v5-c-menu-toggle:focus-visible,
+.pf-v5-c-masthead [id*="OUIA-Generated-MenuToggle"]:focus-visible,
+.pf-v5-c-masthead [data-ouia-component-id*="MenuToggle"]:focus-visible {
   outline: none !important;
   box-shadow: 0 0 0 3px var(--kw-focus) !important;
 }

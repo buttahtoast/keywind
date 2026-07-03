@@ -2,7 +2,11 @@ import type { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
 
 export default {
-  content: ['./theme/**/*.ftl'],
+  content: [
+    './theme/**/*.ftl',
+    './src/**/*.{html,js,ts,jsx,tsx}',
+    './.storybook/**/*.{html,js,ts,jsx,tsx}',
+  ],
   darkMode: 'media',
   experimental: {
     optimizeUniversalDefaults: true,

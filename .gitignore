@@ -2,6 +2,7 @@
 
 # build
 out/
+storybook-static/
 
 # dependencies
 node_modules/
