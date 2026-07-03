@@ -22,15 +22,15 @@
   <#if authenticators?? && shouldDisplayAuthenticators?? && shouldDisplayAuthenticators>
     <div class="space-y-3">
       <#if authenticators.authenticators?size gt 1>
-        <p class="text-secondary-600 text-sm">
+        <p class="text-secondary-600 text-sm dark:text-secondary-300">
           ${kcSanitize(msg(titleMessage))?no_esc}
         </p>
       </#if>
       <#list authenticators.authenticators as authenticator>
-        <div class="rounded-md border border-secondary-200 p-3">
-          <div class="font-medium text-secondary-900">${kcSanitize(msg("${authenticator.label}"))?no_esc}</div>
+        <div class="rounded-md border border-secondary-200 p-3 dark:border-secondary-700">
+          <div class="font-medium text-secondary-900 dark:text-secondary-100">${kcSanitize(msg("${authenticator.label}"))?no_esc}</div>
           <#if authenticator.transports?? && authenticator.transports.displayNameProperties?has_content>
-            <div class="text-secondary-600 text-sm">
+            <div class="text-secondary-600 text-sm dark:text-secondary-300">
               <#list authenticator.transports.displayNameProperties as nameProperty>
                 <span>${kcSanitize(msg("${nameProperty!}"))?no_esc}</span>
                 <#if nameProperty?has_next>
@@ -39,7 +39,7 @@
               </#list>
             </div>
           </#if>
-          <div class="text-secondary-600 text-sm">
+          <div class="text-secondary-600 text-sm dark:text-secondary-300">
             <span>${kcSanitize(msg(createdAtMessage))?no_esc}</span>
             <span>${kcSanitize(authenticator.createdAt)?no_esc}</span>
           </div>

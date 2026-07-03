@@ -5,8 +5,8 @@
   <#if section="header">
     ${msg("frontchannel-logout.title")}
   <#elseif section="form">
-    <p class="text-secondary-600 text-sm">${msg("frontchannel-logout.message")}</p>
-    <ul class="space-y-2 text-secondary-600 text-sm">
+    <p class="text-secondary-600 text-sm dark:text-secondary-300">${msg("frontchannel-logout.message")}</p>
+    <ul class="space-y-2 text-secondary-600 text-sm dark:text-secondary-300">
       <#list logout.clients as client>
         <li>
           ${client.name}

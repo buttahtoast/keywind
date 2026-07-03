@@ -4,7 +4,7 @@
 <#macro
   kw
   autofocus=false
-  class="block border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm"
+  class="block border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm dark:border-secondary-700 dark:bg-secondary-800 dark:text-secondary-100 dark:placeholder-secondary-400 dark:focus:border-primary-500 dark:focus:ring-primary-600"
   disabled=false
   invalid=false
   label=""
@@ -40,7 +40,7 @@
           @click="show = !show"
           aria-controls="${name}"
           :aria-expanded="show"
-          class="absolute text-secondary-400 right-3 top-3 sm:top-2"
+          class="absolute text-secondary-400 right-3 top-3 sm:top-2 dark:text-secondary-500"
           type="button"
         >
           <div x-show="!show">
@@ -70,7 +70,7 @@
       >
     </#if>
     <#if invalid?? && message??>
-      <div class="mt-2 text-red-600 text-sm">
+      <div class="mt-2 text-red-600 text-sm dark:text-red-300">
         ${message?no_esc}
       </div>
     </#if>
