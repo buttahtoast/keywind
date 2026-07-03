@@ -188,6 +188,11 @@
         toggle.insertBefore(init, toggle.firstChild || null);
       }
 
+      // Remove any remaining dropdown caret / last icon elements inside the user toggle (we hide via CSS too)
+      toggle.querySelectorAll('.pf-v5-c-dropdown__toggle-icon, [class*="caret"], [class*="toggle-icon"], .pf-v5-c-menu-toggle__toggle-icon').forEach(function (ic) {
+        if (ic && ic.parentNode) ic.parentNode.removeChild(ic);
+      });
+
       toggle.dataset.kwStyled = '1';
     });
   }

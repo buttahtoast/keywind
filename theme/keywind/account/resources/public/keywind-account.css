@@ -513,6 +513,7 @@ footer a[href*="keycloak.org"],
 .pf-v5-c-masthead .pf-v5-c-toolbar,
 .pf-v5-c-masthead .pf-v5-c-toolbar__content {
   padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
 }
 
 /* ============================================
@@ -525,9 +526,10 @@ footer a[href*="keycloak.org"],
 .pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type {
   display: flex;
   align-items: center;
+  margin-left: auto !important;
 }
 
-/* The clickable user button: avatar + name + chevron */
+/* The clickable user button: avatar + name (no chevron) */
 .pf-v5-c-masthead .pf-v5-c-dropdown__toggle,
 .pf-v5-c-masthead .pf-v5-c-menu-toggle,
 .pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type .pf-v5-c-button,
@@ -535,26 +537,28 @@ footer a[href*="keycloak.org"],
   display: inline-flex !important;
   align-items: center !important;
   gap: 0.5rem !important;
-  padding: 0.2rem 0.65rem 0.2rem 0.3rem !important;
+  padding: 0.2rem 0.75rem 0.2rem 0.35rem !important;
   border-radius: 9999px !important;
-  background: transparent !important;
+  background: var(--kw-surface) !important;
   color: var(--kw-text) !important;
   font-size: 0.8125rem !important;
   font-weight: 500 !important;
   line-height: 1.1;
   min-height: 2rem;
-  border: none !important;
-  box-shadow: none !important;
-  transition: background-color 0.12s ease, transform 0.05s ease;
+  border: 1px solid var(--kw-border) !important;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04) !important;
+  transition: background-color 0.12s ease, border-color 0.12s ease, transform 0.05s ease;
+  cursor: pointer;
 }
 
-/* Subtle hover for the whole user pill */
+/* Stronger hover to indicate it's a button (opens sign out / account menu) */
 .pf-v5-c-masthead .pf-v5-c-dropdown__toggle:hover,
 .pf-v5-c-masthead .pf-v5-c-menu-toggle:hover,
 .pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type .pf-v5-c-button:hover,
 .pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button:hover {
   background-color: var(--kw-surface-muted) !important;
-  color: var(--kw-text) !important;
+  border-color: var(--kw-primary-500) !important;
+  transform: translateY(-0.5px);
 }
 
 /* Avatar (image or placeholder) - clean circle */
@@ -575,7 +579,7 @@ footer a[href*="keycloak.org"],
   display: inline-block;
 }
 
-/* User name text next to avatar */
+/* User name text next to avatar (part of the clickable sign-out button) */
 .pf-v5-c-masthead .pf-v5-c-dropdown__toggle span,
 .pf-v5-c-masthead .pf-v5-c-menu-toggle span,
 .pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type span:not([class*="icon"]):not([class*="caret"]),
@@ -590,15 +594,20 @@ footer a[href*="keycloak.org"],
   letter-spacing: -0.01em;
 }
 
-/* Dropdown chevron / caret icon - subtle */
+/* Make the name text participate in button hover indication */
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle:hover span,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle:hover span,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type:hover span:not([class*="icon"]):not([class*="caret"]),
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type:hover span {
+  color: var(--kw-primary-600) !important;
+}
+
+/* Remove dropdown chevron / last caret icon (the final icon in user menu) */
 .pf-v5-c-masthead .pf-v5-c-dropdown__toggle-icon,
-.pf-v5-c-masthead .pf-v5-c-menu-toggle svg,
-.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type svg {
-  width: 14px !important;
-  height: 14px !important;
-  opacity: 0.55;
-  margin-left: 0.1rem;
-  flex-shrink: 0;
+.pf-v5-c-masthead .pf-v5-c-menu-toggle__toggle-icon,
+.pf-v5-c-masthead [class*="caret"],
+.pf-v5-c-masthead [class*="toggle-icon"] {
+  display: none !important;
 }
 
 /* Improve focus ring on user menu */
