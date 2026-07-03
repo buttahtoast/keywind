@@ -32,6 +32,9 @@ public class LoginThemeTest {
   private static final String MESSAGE_PATH = "theme/base/login/messages/messages";
   private static final String OUTPUT_PATH = "html/login";
   private static final String THEME_PATH = "theme/keywind/login";
+  private static final String[] EXTRA_TEMPLATE_NAMES = {
+      "login-passkeys-conditional-authenticate.ftl"
+  };
 
   @Test
   public void shouldTestTemplates() throws IOException, TemplateException {
@@ -81,8 +84,13 @@ public class LoginThemeTest {
   }
 
   private String[] getTemplateNames() {
-    return Arrays.stream(LoginFormsPages.values())
+    String[] loginFormsPageTemplateNames = Arrays.stream(LoginFormsPages.values())
         .map(Templates::getTemplate)
+        .toArray(String[]::new);
+
+    return Arrays.stream(new String[][] { loginFormsPageTemplateNames, EXTRA_TEMPLATE_NAMES })
+        .flatMap(Arrays::stream)
+        .distinct()
         .toArray(String[]::new);
   }
 

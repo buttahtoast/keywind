@@ -5,6 +5,7 @@ export default defineConfig({
     rollupOptions: {
       input: [
         'src/index.ts',
+        'src/data/passkeys.ts',
         'src/data/recoveryCodes.ts',
         'src/data/webAuthnAuthenticate.ts',
         'src/data/webAuthnRegister.ts',

@@ -9,9 +9,14 @@ public class LoginDataModel {
   public static Map<String, Object> createDataModel() {
     Map<String, Object> dataModel = new HashMap<>();
     dataModel.put("auth", createAuthModel());
+    dataModel.put("brokerContext", createBrokerContextModel());
     dataModel.put("client", createClientModel());
+    dataModel.put("code", createCodeModel());
+    dataModel.put("configuredOtpCredentials", createConfiguredOtpCredentialsModel());
+    dataModel.put("idpDisplayName", "Identity Provider");
     dataModel.put("locale", createLocaleModel());
     dataModel.put("login", createLoginModel());
+    dataModel.put("logout", createFrontchannelLogoutModel());
     dataModel.put("logoutConfirm", createLogoutConfirmModel());
     dataModel.put("message", createMessageModel());
     dataModel.put("oauth", createOAuthModel());
@@ -21,6 +26,7 @@ public class LoginDataModel {
     dataModel.put("recoveryAuthnCodesConfigBean", createRecoveryAuthnCodesConfigBeanModel());
     dataModel.put("recoveryAuthnCodesInputBean", createRecoveryAuthnCodesInputBeanModel());
     dataModel.put("social", createSocialModel());
+    dataModel.put("samlPost", createSamlPostModel());
     dataModel.put("totp", createTotpModel());
     dataModel.put("url", createUrlModel());
     dataModel.put("user", createUserModel());
@@ -55,8 +61,49 @@ public class LoginDataModel {
 
     Map<String, Object> client = new HashMap<>();
     client.put("attributes", attributes);
+    client.put("baseUrl", "baseUrl");
 
     return client;
+  }
+
+  private static Map<String, Object> createBrokerContextModel() {
+    Map<String, Object> brokerContext = new HashMap<>();
+    brokerContext.put("username", "Broker Username");
+
+    return brokerContext;
+  }
+
+  private static Map<String, Object> createCodeModel() {
+    Map<String, Object> code = new HashMap<>();
+    code.put("code", "code");
+    code.put("error", "error");
+    code.put("success", true);
+
+    return code;
+  }
+
+  private static Map<String, Object> createConfiguredOtpCredentialsModel() {
+    Map<String, Object> otpCredential = new HashMap<>();
+    otpCredential.put("id", "otpCredentialId");
+    otpCredential.put("userLabel", "Authenticator app");
+
+    Map<String, Object> configuredOtpCredentials = new HashMap<>();
+    configuredOtpCredentials.put("selectedCredentialId", "otpCredentialId");
+    configuredOtpCredentials.put("userOtpCredentials", List.of(otpCredential));
+
+    return configuredOtpCredentials;
+  }
+
+  private static Map<String, Object> createFrontchannelLogoutModel() {
+    Map<String, Object> client = new HashMap<>();
+    client.put("frontChannelLogoutUrl", "frontChannelLogoutUrl");
+    client.put("name", "Client");
+
+    Map<String, Object> logout = new HashMap<>();
+    logout.put("clients", List.of(client));
+    logout.put("logoutRedirectUri", "logoutRedirectUri");
+
+    return logout;
   }
 
   private static Map<String, Object> createLocaleModel() {
@@ -225,6 +272,7 @@ public class LoginDataModel {
     url.put("loginUrl", "loginUrl");
     url.put("logoutConfirmAction", "logoutConfirmAction");
     url.put("oauthAction", "oauthAction");
+    url.put("oauth2DeviceVerificationAction", "oauth2DeviceVerificationAction");
     url.put("registrationAction", "registrationAction");
     url.put("registrationUrl", "registrationUrl");
     url.put("resourcesPath", "http://localhost:5173");
@@ -233,19 +281,54 @@ public class LoginDataModel {
   }
 
   private static Map<String, Object> createUserModel() {
+    Map<String, Object> organization = new HashMap<>();
+    organization.put("alias", "organization");
+    organization.put("name", "Organization");
+
     Map<String, Object> user = new HashMap<>();
     user.put("editUsernameAllowed", true);
+    user.put("email", "user@example.com");
+    user.put("firstName", "First");
+    user.put("lastName", "Last");
+    user.put("organizations", List.of(organization));
+    user.put("username", "Username");
 
     return user;
   }
 
+  private static Map<String, Object> createSamlPostModel() {
+    Map<String, Object> samlPost = new HashMap<>();
+    samlPost.put("relayState", "relayState");
+    samlPost.put("SAMLRequest", "SAMLRequest");
+    samlPost.put("url", "url");
+
+    return samlPost;
+  }
+
   private static Map<String, Object> createWebAuthnModel() {
+    Map<String, Object> transport = new HashMap<>();
+    transport.put("displayNameProperties", List.of("webauthn-transport-usb"));
+
+    Map<String, Object> authenticator = new HashMap<>();
+    authenticator.put("credentialId", "credentialId");
+    authenticator.put("createdAt", "createdAt");
+    authenticator.put("label", "Security key");
+    authenticator.put("transports", transport);
+
+    Map<String, Object> authenticators = new HashMap<>();
+    authenticators.put("authenticators", List.of(authenticator));
+
     Map<String, Object> webAuthn = new HashMap<>();
+    webAuthn.put("authenticatorAttachment", "platform");
+    webAuthn.put("authenticators", authenticators);
     webAuthn.put("challenge", "challenge");
     webAuthn.put("execution", "execution");
     webAuthn.put("createTimeout", "60000");
+    webAuthn.put("enableWebAuthnConditionalUI", true);
     webAuthn.put("isUserIdentified", "true");
+    webAuthn.put("mediation", "conditional");
     webAuthn.put("rpId", "https://webauthn.me");
+    webAuthn.put("shouldDisplayAuthenticators", true);
     webAuthn.put("userVerification", "preferred");
 
     return webAuthn;

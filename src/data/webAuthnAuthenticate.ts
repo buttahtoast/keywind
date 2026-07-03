@@ -28,6 +28,8 @@ type StoreType = {
   };
 };
 
+const isTruthy = (value: string | boolean) => value === true || value === 'true';
+
 document.addEventListener('alpine:init', () => {
   Alpine.data('webAuthnAuthenticate', function (this: DataType) {
     const {
@@ -134,7 +136,7 @@ document.addEventListener('alpine:init', () => {
 
     return {
       webAuthnAuthenticate: () => {
-        if (!isUserIdentified) {
+        if (!isTruthy(isUserIdentified)) {
           doAuthenticate([]);
 
           return;

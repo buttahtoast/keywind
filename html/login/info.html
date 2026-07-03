@@ -14,37 +14,12 @@
           <div class="font-bold text-center text-2xl">
             Keywind
           </div>
-          <h1 class="text-center text-xl">Update Account Information</h1>
+          <h1 class="text-center text-xl">Example of an error message</h1>
         </div>
         <div class="space-y-4">
-          <div class="bg-red-100 text-red-600 p-4 rounded-lg text-sm" role="alert">
-            Example of an error message
+          <div class="space-y-3 text-secondary-600 text-sm">
+            <p>Example of an error message</p><a class="text-primary-600 hover:text-primary-500 inline-flex" href="baseUrl"> &amp;laquo; Back to Application </a>
           </div>
-          <form class="m-0 space-y-4" method="post" action="loginAction">
-            <div>
-              <label class="sr-only" for="username"> Username </label> <input autofocus required aria-invalid="false" class="block border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm" id="username" name="username" placeholder="Username" type="text" autocomplete="username" value="Username">
-              <div class="mt-2 text-red-600 text-sm">
-              </div>
-            </div>
-            <div>
-              <label class="sr-only" for="email"> Email </label> <input required aria-invalid="false" class="block border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm" id="email" name="email" placeholder="Email" type="email" autocomplete="email" value="user@example.com">
-              <div class="mt-2 text-red-600 text-sm">
-              </div>
-            </div>
-            <div>
-              <label class="sr-only" for="firstName"> First name </label> <input required aria-invalid="false" class="block border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm" id="firstName" name="firstName" placeholder="First name" type="text" autocomplete="given-name" value="First">
-              <div class="mt-2 text-red-600 text-sm">
-              </div>
-            </div>
-            <div>
-              <label class="sr-only" for="lastName"> Last name </label> <input required aria-invalid="false" class="block border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm" id="lastName" name="lastName" placeholder="Last name" type="text" autocomplete="family-name" value="Last">
-              <div class="mt-2 text-red-600 text-sm">
-              </div>
-            </div>
-            <div class="flex flex-col pt-4 space-y-2">
-              <button class="bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700 px-4 py-2 text-sm flex justify-center relative rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-offset-2" type="submit"> Submit </button>
-            </div>
-          </form>
           <form action="loginAction" method="post">
             <input name="tryAnotherWay" type="hidden" value="on"> <button class="bg-secondary-100 text-secondary-600 focus:ring-secondary-600 hover:bg-secondary-200 hover:text-secondary-900 px-4 py-2 text-sm flex justify-center relative rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-offset-2" type="submit"> Try Another Way </button>
           </form>
