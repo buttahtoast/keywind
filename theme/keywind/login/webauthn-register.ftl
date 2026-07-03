@@ -2,6 +2,11 @@
 <#import "components/atoms/button.ftl" as button>
 <#import "components/atoms/button-group.ftl" as buttonGroup>
 <#assign webAuthnData = webAuthn!{} />
+<#if !webAuthnData?has_content && webauthn??>
+  <#assign webAuthnData = webauthn />
+</#if>
+<#assign excludeCredentialIdsValue = (webAuthnData.excludeCredentialIds)!(excludeCredentialIds!"") />
+<#assign signatureAlgorithmsValue = (webAuthnData.signatureAlgorithms)!(signatureAlgorithms!"") />
 
 <@layout.registrationLayout script="dist/webAuthnRegister.js"; section>
   <#if section="title">
@@ -41,11 +46,11 @@
       authenticatorAttachment: '${((webAuthnData.authenticatorAttachment)!(authenticatorAttachment!""))?string?js_string}',
       challenge: '${((webAuthnData.challenge)!(challenge!""))?string?js_string}',
       createTimeout: '${((webAuthnData.createTimeout)!(createTimeout!""))?string?js_string}',
-      excludeCredentialIds: '${((webAuthnData.excludeCredentialIds)!(excludeCredentialIds!""))?string?js_string}',
+      excludeCredentialIds: '<#if excludeCredentialIdsValue?is_sequence>${excludeCredentialIdsValue?join(",")?js_string}<#else>${excludeCredentialIdsValue?string?js_string}</#if>',
       requireResidentKey: '${((webAuthnData.requireResidentKey)!(requireResidentKey!""))?string?js_string}',
       rpEntityName: '${((webAuthnData.rpEntityName)!(rpEntityName!""))?string?js_string}',
       rpId: '${((webAuthnData.rpId)!(rpId!""))?string?js_string}',
-      signatureAlgorithms: '${((webAuthnData.signatureAlgorithms)!(signatureAlgorithms!""))?string?js_string}',
+      signatureAlgorithms: '<#if signatureAlgorithmsValue?is_sequence>${signatureAlgorithmsValue?join(",")?js_string}<#else>${signatureAlgorithmsValue?string?js_string}</#if>',
       unsupportedBrowserText: '${msg("webauthn-unsupported-browser-text")?js_string}',
       userId: '${((webAuthnData.userid)!(webAuthnData.userId)!(userid!""))?string?js_string}',
       userVerificationRequirement: '${((webAuthnData.userVerificationRequirement)!(userVerificationRequirement!""))?string?js_string}',

@@ -1,5 +1,8 @@
 <#import "components/atoms/button.ftl" as button>
 <#assign webAuthnData = webAuthn!{} />
+<#if !webAuthnData?has_content && webauthn??>
+  <#assign webAuthnData = webauthn />
+</#if>
 <#assign webAuthnAuthenticators = (webAuthnData.authenticators)!(authenticators!"") />
 <#assign webAuthnShouldDisplayAuthenticators = (webAuthnData.shouldDisplayAuthenticators)!(shouldDisplayAuthenticators!false) />
 <#assign webAuthnConditionalUIEnabled = (webAuthnData.enableWebAuthnConditionalUI)!(enableWebAuthnConditionalUI!"") />

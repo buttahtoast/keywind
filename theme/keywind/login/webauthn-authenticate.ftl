@@ -2,6 +2,9 @@
 <#import "components/atoms/button.ftl" as button>
 <#import "components/atoms/button-group.ftl" as buttonGroup>
 <#assign webAuthnData = webAuthn!{} />
+<#if !webAuthnData?has_content && webauthn??>
+  <#assign webAuthnData = webauthn />
+</#if>
 <#assign webAuthnAuthenticators = (webAuthnData.authenticators)!(authenticators!"") />
 <#assign webAuthnShouldDisplayAuthenticators = (webAuthnData.shouldDisplayAuthenticators)!(shouldDisplayAuthenticators!false) />
 

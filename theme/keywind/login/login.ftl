@@ -11,6 +11,9 @@
 
 <#assign usernameLabel><@usernameLabel.kw /></#assign>
 <#assign webAuthnData = webAuthn!{} />
+<#if !webAuthnData?has_content && webauthn??>
+  <#assign webAuthnData = webauthn />
+</#if>
 <#assign webAuthnConditionalUIEnabled = (webAuthnData.enableWebAuthnConditionalUI)!(enableWebAuthnConditionalUI!"") />
 
 <@layout.registrationLayout
