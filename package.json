@@ -5,7 +5,9 @@
     "build": "tsc && vite build",
     "build:jar": "vite-node scripts/build",
     "dev": "vite dev",
-    "test": "mvn test"
+    "mock:generate": "bash scripts/mock-generate.sh",
+    "preview:ui": "bash scripts/mock-generate.sh && vite dev",
+    "test": "bash scripts/mock-generate.sh"
   },
   "dependencies": {
     "alpinejs": "^3.13.0",

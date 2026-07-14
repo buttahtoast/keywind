@@ -98,6 +98,52 @@ You can update Keywind components in your own child theme. For example, create a
 </#macro>
 ```
 
+## Local UI preview (mock)
+
+You can verify every login page **without a Keycloak server**. FreeMarker templates are rendered with a mock data model into static HTML; Vite serves those pages and hot-reloads CSS/JS.
+
+### Prerequisites
+
+- **Node.js** 20+ (npm or pnpm)
+- **Java 21 + Maven**, *or* **Docker** (used automatically if Maven is missing)
+
+### Quick start
+
+```bash
+npm install          # or: pnpm install
+npm run mock:generate
+npm run dev
+```
+
+Then open [http://localhost:5173/](http://localhost:5173/) — an index lists every mock page (login, register, OTP, WebAuthn, …).
+
+| Script | What it does |
+| --- | --- |
+| `npm run mock:generate` | Render `theme/keywind/login/**/*.ftl` → `html/login/*.html` + `html/index.html` |
+| `npm run dev` | Start Vite on port 5173 (HMR for `src/index.css` / `src/index.ts`) |
+| `npm run preview:ui` | Generate mocks, then start Vite |
+| `npm test` | Same as `mock:generate` (Maven/Docker FreeMarker tests) |
+
+After you change FreeMarker templates or mock data (`src/test/java/.../LoginDataModel.java`), re-run `mock:generate`. CSS/JS-only changes only need `dev` (HMR).
+
+### How it works
+
+1. `LoginThemeTest` / `AccountThemeTest` load Keycloak base messages and each FreeMarker template.
+2. Templates are processed with mock models (`LoginDataModel`, `AccountDataModel`).
+3. Output is written under `html/login/` and `html/account/` with asset URLs pointing at Vite (`/src/index.css`, `/src/index.ts`).
+4. `npm run dev` serves those pages so humans or agents can screenshot and click through the UI.
+
+Mock generation uses local `mvn test` when Maven is installed; otherwise it runs the same tests in `maven:3.9-eclipse-temurin-21` via Docker.
+
+### Login vs Account
+
+| | Login | Account |
+| --- | --- | --- |
+| Production | FreeMarker templates (`theme/keywind/login`) | Keycloak Account Console **v3 SPA** (`parent=keycloak.v3`) + CSS/JS overlays |
+| Local mocks | Full page set under `html/login/` | FreeMarker Account Console under `html/account/` (personal info, signing in, TOTP, sessions, applications, linked accounts) |
+
+The Account FreeMarker pages share the Keywind design system for local UI work. In a real Keycloak deployment the account theme still restyles the official SPA via `keywind-account.css` / `keywind-account.js`.
+
 ## Build
 
 When you're ready to deploy your own theme, run the build command to generate a static production build.
