@@ -104,7 +104,6 @@ public class AccountDataModel {
 
   /**
    * Point styles/scripts at Vite source entries so {@code npm run dev} can HMR them.
-   * Production account theme.properties still uses public/* SPA overlay assets.
    */
   private static Map<String, Object> createPropertiesModel() {
     Map<String, Object> properties = new HashMap<>();

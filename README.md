@@ -139,10 +139,12 @@ Mock generation uses local `mvn test` when Maven is installed; otherwise it runs
 
 | | Login | Account |
 | --- | --- | --- |
-| Production | FreeMarker templates (`theme/keywind/login`) | Keycloak Account Console **v3 SPA** (`parent=keycloak.v3`) + CSS/JS overlays |
-| Local mocks | Full page set under `html/login/` | FreeMarker Account Console under `html/account/` (personal info, signing in, TOTP, sessions, applications, linked accounts) |
+| Production | FreeMarker templates (`theme/keywind/login`) | Keycloak Account Console **v3 SPA** restyled by `keywind-account.css` / `keywind-account.js` (`parent=keycloak.v3`) |
+| Local mocks | Full page set under `html/login/` | FreeMarker Account Console under `html/account/` (design reference; not served by Keycloak) |
 
-The Account FreeMarker pages share the Keywind design system for local UI work. In a real Keycloak deployment the account theme still restyles the official SPA via `keywind-account.css` / `keywind-account.js`.
+**Real Keycloak account:** set Account theme to `keywind` in Realm settings. The SPA keeps working; Keywind injects palette, landscape background, de-branding, and cleaner cards/nav.
+
+**Local FreeMarker account mocks** (`npm run dev` → `/html/account/`) are for UI design only and are not used at `/realms/.../account`.
 
 ## Build
 

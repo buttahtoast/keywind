@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* ============================================
+   Keywind Account Console SPA restyle
+   Matches login FreeMarker palette + landscape
+   ============================================ */
+
 :root {
-  /* Modern clean palette: zinc + blue accent (matches login theme) */
   --kw-primary-50: #eff6ff;
   --kw-primary-100: #dbeafe;
   --kw-primary-200: #bfdbfe;
@@ -22,8 +26,13 @@
   --kw-primary-button-bg-hover: var(--kw-primary-700);
   --kw-primary-button-text: #ffffff;
   --kw-focus: rgb(37 99 235 / 0.15);
+  --kw-radius: 1rem;
+  --kw-radius-lg: 1.25rem;
+  --kw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --kw-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
 
-  --pf-global--BackgroundColor--100: var(--kw-page-bg);
+  /* PatternFly v4/v5 tokens → Keywind */
+  --pf-global--BackgroundColor--100: transparent;
   --pf-global--BackgroundColor--light-100: var(--kw-surface);
   --pf-global--BackgroundColor--light-200: var(--kw-surface-muted);
   --pf-global--BorderColor--100: var(--kw-border);
@@ -32,7 +41,11 @@
   --pf-global--Color--200: var(--kw-text-muted);
   --pf-global--link--Color: var(--kw-link);
   --pf-global--link--Color--hover: var(--kw-link-hover);
-  --pf-v5-global--BackgroundColor--100: var(--kw-page-bg);
+  --pf-global--primary-color--100: var(--kw-primary-600);
+  --pf-global--primary-color--200: var(--kw-primary-700);
+  --pf-global--FontFamily--sans-serif: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --pf-v5-global--BackgroundColor--100: transparent;
   --pf-v5-global--BackgroundColor--light-100: var(--kw-surface);
   --pf-v5-global--BackgroundColor--light-200: var(--kw-surface-muted);
   --pf-v5-global--BorderColor--100: var(--kw-border);
@@ -41,6 +54,11 @@
   --pf-v5-global--Color--200: var(--kw-text-muted);
   --pf-v5-global--link--Color: var(--kw-link);
   --pf-v5-global--link--Color--hover: var(--kw-link-hover);
+  --pf-v5-global--primary-color--100: var(--kw-primary-600);
+  --pf-v5-global--primary-color--200: var(--kw-primary-700);
+  --pf-v5-global--FontFamily--text: Inter, ui-sans-serif, system-ui, sans-serif;
+  --pf-v5-global--FontFamily--heading: Inter, ui-sans-serif, system-ui, sans-serif;
+
   color-scheme: light;
 }
 
@@ -66,16 +84,150 @@
     --kw-primary-button-bg-hover: #1d4ed8;
     --kw-primary-button-text: #ffffff;
     --kw-focus: rgb(96 165 250 / 0.2);
+    --kw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.15);
+    --kw-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.25), 0 4px 6px -4px rgb(0 0 0 / 0.2);
     color-scheme: dark;
   }
 }
 
+/* ============================================
+   Landscape background (same idea as login)
+   Injected by keywind-account.js as .kw-landscape
+   ============================================ */
+
+.kw-landscape {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #c7d2fe 0%,
+    #e0e7ff 32%,
+    #f0f4f8 68%,
+    #f8fafc 100%
+  );
+}
+
+.kw-landscape svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.kw-landscape .sun-glow {
+  fill: #facc15;
+  opacity: 0.18;
+}
+
+.kw-landscape .sun {
+  fill: #fef08c;
+  opacity: 0.55;
+}
+
+.kw-landscape .cloud {
+  fill: #f8fafc;
+  opacity: 0.65;
+  animation: kw-cloud-drift linear infinite;
+}
+
+.kw-landscape .cloud-slow {
+  animation-duration: 92s;
+}
+
+.kw-landscape .cloud-medium {
+  animation-duration: 64s;
+}
+
+.kw-landscape .cloud-fast {
+  animation-duration: 48s;
+}
+
+.kw-landscape .hill-far {
+  fill: #64748b;
+  opacity: 0.32;
+}
+
+.kw-landscape .hill-mid {
+  fill: #475569;
+  opacity: 0.42;
+}
+
+.kw-landscape .hill-front {
+  fill: #334155;
+  opacity: 0.55;
+}
+
+.kw-landscape .mist {
+  fill: #f8fafc;
+  opacity: 0.35;
+}
+
+@media (prefers-color-scheme: dark) {
+  .kw-landscape {
+    background: linear-gradient(
+      180deg,
+      #0f172a 0%,
+      #1e293b 35%,
+      #1e293b 70%,
+      #0f172a 100%
+    );
+  }
+
+  .kw-landscape .sun-glow {
+    fill: #854d0e;
+    opacity: 0.08;
+  }
+
+  .kw-landscape .sun {
+    fill: #fde047;
+    opacity: 0.2;
+  }
+
+  .kw-landscape .cloud {
+    fill: #64748b;
+    opacity: 0.12;
+  }
+
+  .kw-landscape .hill-far {
+    fill: #475569;
+    opacity: 0.38;
+  }
+
+  .kw-landscape .hill-mid {
+    fill: #334155;
+    opacity: 0.48;
+  }
+
+  .kw-landscape .hill-front {
+    fill: #1e293b;
+    opacity: 0.65;
+  }
+
+  .kw-landscape .mist {
+    fill: #0f172a;
+    opacity: 0.25;
+  }
+}
+
+@keyframes kw-cloud-drift {
+  from {
+    transform: translateX(-260px);
+  }
+  to {
+    transform: translateX(1520px);
+  }
+}
+
+/* ============================================
+   Base page – transparent over landscape
+   ============================================ */
+
 html,
-body,
-#app,
-#main_react_container {
+body {
   min-height: 100%;
-  background: var(--kw-page-bg);
+  background: transparent !important;
   color: var(--kw-text);
 }
 
@@ -86,6 +238,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+#app,
+#main_react_container,
+.pf-v5-c-page,
+.pf-c-page {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  background: transparent !important;
+  color: var(--kw-text);
+}
+
 a {
   color: var(--kw-link);
 }
@@ -94,11 +257,16 @@ a:hover {
   color: var(--kw-link-hover);
 }
 
+/* Loading screen while SPA boots */
+.keycloak__loading-container {
+  background: transparent !important;
+  color: var(--kw-text) !important;
+}
+
 /* ============================================
-   Remove all Keycloak branding / banners
+   De-brand Keycloak logos / banners
    ============================================ */
 
-/* Hide Keycloak logo images and brands (login + account) */
 .pf-c-brand img,
 .pf-v5-c-brand img,
 .brand img,
@@ -118,25 +286,28 @@ svg[aria-label*="keycloak" i] {
 .keycloak__brand,
 .pf-v5-c-masthead__brand,
 .pf-v5-c-masthead .pf-v5-c-brand,
-.pf-v5-c-masthead .pf-v5-c-masthead-brand {
+.pf-v5-c-masthead .pf-v5-c-masthead-brand,
+.pf-c-page__header-brand,
+.pf-v5-c-page__header-brand {
   background-image: none !important;
   display: none !important;
 }
 
-/* Masthead (top banner bar in Account Console v3) — clean, no Keycloak branding */
-.pf-v5-c-masthead {
-  background: var(--kw-surface);
-  border-bottom: 1px solid var(--kw-border);
-  box-shadow: none;
+/* ============================================
+   Masthead
+   ============================================ */
+
+.pf-v5-c-masthead,
+.pf-c-page__header,
+.pf-v5-c-page__header {
+  background: color-mix(in srgb, var(--kw-surface) 88%, transparent) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--kw-border) !important;
+  box-shadow: none !important;
+  min-height: 3rem;
 }
 
-/* Make masthead feel less like a "banner" and more part of the app */
-.pf-v5-c-masthead {
-  min-height: 2.75rem;
-}
-
-.pf-v5-c-masthead .pf-v5-c-brand,
-.pf-v5-c-masthead .pf-v5-c-masthead-brand,
 .pf-v5-c-masthead .pf-v5-c-toolbar__group:first-of-type,
 .pf-v5-c-masthead .pf-v5-c-toolbar__item:first-of-type {
   display: none !important;
@@ -147,110 +318,186 @@ svg[aria-label*="keycloak" i] {
   overflow: hidden;
 }
 
-/* Collapse any remaining brand containers in headers */
-.pf-v5-c-masthead__brand,
-.pf-c-page__header-brand {
-  display: none !important;
-}
-
-.pf-c-page,
-.pf-v5-c-page {
-  background: var(--kw-page-bg);
-  color: var(--kw-text);
-}
-
-.pf-c-page__header,
-.pf-v5-c-page__header,
-.pf-v5-c-masthead {
-  background: var(--kw-surface);
-  border-bottom: 1px solid var(--kw-border);
-  box-shadow: none;
-}
-
-.pf-c-page__header-brand,
+.pf-v5-c-masthead .pf-v5-c-toolbar,
 .pf-c-page__header-tools,
-.pf-v5-c-page__header-brand,
-.pf-v5-c-page__header-tools,
-.pf-v5-c-masthead .pf-v5-c-toolbar {
+.pf-v5-c-page__header-tools {
   min-height: 3rem;
 }
 
-/* Remove any default logo sizing */
-.pf-c-brand.brand,
-.pf-v5-c-brand.brand,
-.brand {
-  max-height: 0;
-  display: none;
+/* Push user menu to the right */
+.pf-v5-c-masthead .pf-v5-c-toolbar__content-section,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type,
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type {
+  display: flex;
+  align-items: center;
+  margin-left: auto !important;
 }
+
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type .pf-v5-c-button,
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0.2rem 0.75rem 0.2rem 0.35rem !important;
+  border-radius: 9999px !important;
+  background: var(--kw-surface) !important;
+  color: var(--kw-text) !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  line-height: 1.1;
+  min-height: 2rem;
+  border: 1px solid var(--kw-border) !important;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04) !important;
+  transition: background-color 0.12s ease, border-color 0.12s ease, transform 0.05s ease;
+  cursor: pointer;
+}
+
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle:hover,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle:hover,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type .pf-v5-c-button:hover,
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button:hover {
+  background-color: var(--kw-surface-muted) !important;
+  border-color: var(--kw-primary-500) !important;
+  transform: translateY(-0.5px);
+}
+
+.pf-v5-c-masthead img,
+.pf-v5-c-masthead .pf-v5-c-avatar,
+.pf-v5-c-masthead [class*="avatar"],
+.pf-v5-c-masthead .pf-c-avatar {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  border-radius: 9999px !important;
+  object-fit: cover !important;
+  border: 1px solid var(--kw-border-strong) !important;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+  flex-shrink: 0;
+  background-color: var(--kw-surface-muted);
+  display: inline-block;
+}
+
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle span,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle span,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type span:not([class*="icon"]):not([class*="caret"]),
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type span {
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  color: var(--kw-text) !important;
+  white-space: nowrap;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle:hover span,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle:hover span,
+.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type:hover span:not([class*="icon"]):not([class*="caret"]),
+.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type:hover span {
+  color: var(--kw-primary-600) !important;
+}
+
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle-icon,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle__toggle-icon,
+.pf-v5-c-masthead [class*="caret"],
+.pf-v5-c-masthead [class*="toggle-icon"] {
+  display: none !important;
+}
+
+.pf-v5-c-masthead .pf-v5-c-dropdown__toggle:focus-visible,
+.pf-v5-c-masthead .pf-v5-c-menu-toggle:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 3px var(--kw-focus) !important;
+}
+
+.pf-v5-c-masthead .kw-user-initials {
+  flex-shrink: 0;
+  font-family: inherit;
+  user-select: none;
+}
+
+/* ============================================
+   Sidebar navigation
+   ============================================ */
 
 .pf-c-page__sidebar,
 .pf-c-page__sidebar-body,
 .pf-v5-c-page__sidebar,
 .pf-v5-c-page__sidebar-body {
-  background: var(--kw-surface);
-  border-right: 1px solid var(--kw-border);
+  background: color-mix(in srgb, var(--kw-surface) 90%, transparent) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid var(--kw-border) !important;
+  box-shadow: none !important;
 }
 
 .pf-c-nav {
   --pf-c-nav__link--Color: var(--kw-text-muted);
-  --pf-c-nav__link--hover--Color: var(--kw-link-hover);
+  --pf-c-nav__link--hover--Color: var(--kw-text);
   --pf-c-nav__link--m-current--Color: var(--kw-primary-600);
   --pf-c-nav__link--m-current--BackgroundColor: var(--kw-primary-50);
 }
 
 .pf-v5-c-nav {
   --pf-v5-c-nav__link--Color: var(--kw-text-muted);
-  --pf-v5-c-nav__link--hover--Color: var(--kw-link-hover);
+  --pf-v5-c-nav__link--hover--Color: var(--kw-text);
   --pf-v5-c-nav__link--m-current--Color: var(--kw-primary-600);
   --pf-v5-c-nav__link--m-current--BackgroundColor: var(--kw-primary-50);
 }
 
 .pf-c-nav__link,
 .pf-v5-c-nav__link {
-  border-radius: 0.75rem;
-  margin: 0.125rem 0.75rem;
+  border-radius: 0.75rem !important;
+  margin: 0.125rem 0.75rem !important;
+  font-weight: 500 !important;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-/* Nicer active nav item (simple left accent + bg) */
+.pf-v5-c-nav__link:hover,
+.pf-c-nav__link:hover {
+  background: var(--kw-surface-muted) !important;
+  color: var(--kw-text) !important;
+}
+
 .pf-v5-c-nav__link.pf-m-current,
-.pf-v5-c-nav__link--m-current,
-.pf-v5-c-nav__link[aria-current="page"] {
-  background-color: var(--kw-primary-50) !important;
-  color: var(--kw-primary-600) !important;
-  font-weight: 600;
-  position: relative;
+.pf-v5-c-nav__link[aria-current="page"],
+.pf-c-nav__link.pf-m-current,
+.pf-c-nav__link[aria-current="page"] {
+  background-color: var(--kw-surface) !important;
+  color: var(--kw-text) !important;
+  font-weight: 600 !important;
+  border: 1px solid var(--kw-border) !important;
+  box-shadow: var(--kw-shadow);
 }
 
-.pf-v5-c-nav__link.pf-m-current::before,
-.pf-v5-c-nav__link--m-current::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 6px;
-  bottom: 6px;
-  width: 3px;
-  background: var(--kw-primary-600);
-  border-radius: 0 2px 2px 0;
-}
-
+/* Hide PF left-bar accent (we use card-style active state) */
 .pf-c-nav__link::before,
 .pf-c-nav__link::after,
 .pf-v5-c-nav__link::before,
 .pf-v5-c-nav__link::after {
-  display: none;
+  display: none !important;
+}
+
+/* ============================================
+   Main content
+   ============================================ */
+
+.pf-c-page__main,
+.pf-v5-c-page__main {
+  background: transparent !important;
 }
 
 .pf-c-page__main-section,
-.pf-v5-c-page__main-section {
-  background: transparent;
-}
-
+.pf-v5-c-page__main-section,
 .pf-c-page__main-section.pf-m-light,
-.pf-c-page__main-breadcrumb,
 .pf-v5-c-page__main-section.pf-m-light,
+.pf-c-page__main-breadcrumb,
 .pf-v5-c-page__main-breadcrumb {
-  background: transparent;
+  background: transparent !important;
 }
 
 .pf-c-content,
@@ -275,22 +522,32 @@ svg[aria-label*="keycloak" i] {
 .pf-c-title.pf-m-xl,
 .pf-v5-c-content h1,
 .pf-v5-c-title.pf-m-2xl,
-.pf-v5-c-title.pf-m-xl {
-  color: var(--kw-text);
-  font-weight: 600;
+.pf-v5-c-title.pf-m-xl,
+.pf-v5-c-content h2,
+.pf-c-content h2 {
+  color: var(--kw-text) !important;
+  font-weight: 600 !important;
   letter-spacing: -0.025em;
 }
 
+/* ============================================
+   Cards / panels (match FreeMarker section cards)
+   ============================================ */
+
 .pf-c-card,
-.pf-c-page__main-section .pf-c-wizard,
-.pf-c-modal-box,
 .pf-v5-c-card,
+.pf-c-page__main-section .pf-c-wizard,
 .pf-v5-c-page__main-section .pf-v5-c-wizard,
-.pf-v5-c-modal-box {
-  background: var(--kw-surface);
-  border: 1px solid var(--kw-border);
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+.pf-c-modal-box,
+.pf-v5-c-modal-box,
+.pf-v5-c-drawer__panel,
+.pf-c-drawer__panel {
+  background: color-mix(in srgb, var(--kw-surface) 94%, transparent) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--kw-border) !important;
+  border-radius: var(--kw-radius-lg) !important;
+  box-shadow: var(--kw-shadow-lg) !important;
 }
 
 .pf-c-card__title,
@@ -298,328 +555,233 @@ svg[aria-label*="keycloak" i] {
 .pf-c-card__footer,
 .pf-v5-c-card__title,
 .pf-v5-c-card__body,
-.pf-v5-c-card__footer {
+.pf-v5-c-card__footer,
+.pf-c-card__header,
+.pf-v5-c-card__header {
+  background: transparent !important;
   color: var(--kw-text);
 }
 
-.pf-c-card__header,
-.pf-c-card__title,
-.pf-c-card__body,
-.pf-c-card__footer,
-.pf-v5-c-card__header,
-.pf-v5-c-card__title,
-.pf-v5-c-card__body,
-.pf-v5-c-card__footer {
-  background: transparent;
+/* Data lists / tables */
+.pf-c-data-list,
+.pf-v5-c-data-list,
+.pf-c-table,
+.pf-v5-c-table {
+  background: transparent !important;
+  border-color: var(--kw-border) !important;
 }
+
+.pf-c-data-list__item,
+.pf-v5-c-data-list__item,
+.pf-c-table tr,
+.pf-v5-c-table tr {
+  border-color: var(--kw-border) !important;
+  background: transparent !important;
+}
+
+.pf-c-data-list__item-row,
+.pf-v5-c-data-list__item-row {
+  background: transparent !important;
+}
+
+/* ============================================
+   Forms
+   ============================================ */
+
+.pf-c-form-control,
+.pf-v5-c-form-control,
+.pf-c-text-input-group,
+.pf-v5-c-text-input-group,
+input.pf-c-form-control,
+input.pf-v5-c-form-control,
+textarea.pf-c-form-control,
+textarea.pf-v5-c-form-control,
+select.pf-c-form-control,
+select.pf-v5-c-form-control {
+  border-radius: 1rem !important;
+  border-color: var(--kw-border) !important;
+  background: var(--kw-surface) !important;
+  color: var(--kw-text) !important;
+  box-shadow: none !important;
+  min-height: 2.75rem;
+}
+
+.pf-c-form-control:focus,
+.pf-v5-c-form-control:focus,
+input.pf-c-form-control:focus,
+input.pf-v5-c-form-control:focus,
+textarea.pf-c-form-control:focus,
+textarea.pf-v5-c-form-control:focus {
+  border-color: var(--kw-primary-500) !important;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--kw-primary-500) 30%, transparent) !important;
+  outline: none !important;
+}
+
+.pf-c-form__label,
+.pf-v5-c-form__label,
+.pf-c-form__label-text,
+.pf-v5-c-form__label-text {
+  color: var(--kw-text) !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
 
 .pf-c-button,
 .pf-v5-c-button {
-  border-radius: 1rem;
-  font-weight: 500;
+  border-radius: 1rem !important;
+  font-weight: 500 !important;
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .pf-c-button.pf-m-primary,
 .pf-v5-c-button.pf-m-primary {
-  background: var(--kw-primary-button-bg);
-  color: var(--kw-primary-button-text);
+  background: var(--kw-primary-button-bg) !important;
+  color: var(--kw-primary-button-text) !important;
+  border-color: transparent !important;
 }
 
 .pf-c-button.pf-m-primary:hover,
 .pf-c-button.pf-m-primary:focus,
 .pf-v5-c-button.pf-m-primary:hover,
 .pf-v5-c-button.pf-m-primary:focus {
-  background: var(--kw-primary-button-bg-hover);
-  color: var(--kw-primary-button-text);
+  background: var(--kw-primary-button-bg-hover) !important;
+  color: var(--kw-primary-button-text) !important;
 }
 
 .pf-c-button.pf-m-secondary,
 .pf-c-button.pf-m-control,
 .pf-v5-c-button.pf-m-secondary,
 .pf-v5-c-button.pf-m-control {
-  background: var(--kw-surface);
-  border-color: var(--kw-border-strong);
-  color: var(--kw-text);
+  background: var(--kw-surface) !important;
+  border-color: var(--kw-border) !important;
+  color: var(--kw-text) !important;
 }
 
 .pf-c-button.pf-m-secondary:hover,
 .pf-c-button.pf-m-control:hover,
 .pf-v5-c-button.pf-m-secondary:hover,
 .pf-v5-c-button.pf-m-control:hover {
-  background: var(--kw-surface-muted);
-  border-color: var(--kw-primary-500);
-  color: var(--kw-link-hover);
+  background: var(--kw-surface-muted) !important;
+  border-color: var(--kw-border-strong) !important;
 }
 
 .pf-c-button.pf-m-link,
-.pf-v5-c-button.pf-m-link {
-  color: var(--kw-link);
+.pf-v5-c-button.pf-m-link,
+.pf-c-button.pf-m-plain,
+.pf-v5-c-button.pf-m-plain {
+  color: var(--kw-text-muted) !important;
 }
 
 .pf-c-button.pf-m-link:hover,
-.pf-v5-c-button.pf-m-link:hover {
-  color: var(--kw-link-hover);
+.pf-v5-c-button.pf-m-link:hover,
+.pf-c-button.pf-m-plain:hover,
+.pf-v5-c-button.pf-m-plain:hover {
+  color: var(--kw-text) !important;
+  background: var(--kw-surface-muted) !important;
 }
 
-.pf-c-form-control,
-.pf-c-select__toggle,
-.pf-c-dropdown__toggle,
-.pf-v5-c-form-control,
-.pf-v5-c-select__toggle,
-.pf-v5-c-dropdown__toggle,
-.pf-v5-c-menu-toggle {
-  background: var(--kw-surface);
-  border-color: var(--kw-border);
-  border-radius: 1rem;
-  color: var(--kw-text);
-}
-
-.pf-c-form-control,
-.pf-v5-c-form-control {
-  --pf-c-form-control--Color: var(--kw-text);
-  --pf-c-form-control--BackgroundColor: var(--kw-surface);
-  --pf-v5-c-form-control--Color: var(--kw-text);
-  --pf-v5-c-form-control--BackgroundColor: var(--kw-surface);
-}
-
-.pf-c-form-control::placeholder,
-.pf-v5-c-form-control::placeholder {
-  color: var(--kw-text-subtle);
-}
-
-.pf-c-form-control:focus,
-.pf-c-select__toggle:focus,
-.pf-c-dropdown__toggle:focus,
-.pf-v5-c-form-control:focus,
-.pf-v5-c-select__toggle:focus,
-.pf-v5-c-dropdown__toggle:focus,
-.pf-v5-c-menu-toggle:focus {
-  border-color: var(--kw-primary-500);
-  box-shadow: 0 0 0 3px var(--kw-focus);
-  outline: none;
-}
-
-.pf-c-alert,
-.pf-v5-c-alert {
-  background: var(--kw-surface-muted);
-  color: var(--kw-text);
-  border-radius: 1rem;
-  box-shadow: none;
-  border: 1px solid var(--kw-border);
-}
-
-.pf-c-table,
-.pf-c-table tr,
-.pf-v5-c-table,
-.pf-v5-c-table tr {
-  background: var(--kw-surface);
-  border-color: var(--kw-border);
-  color: var(--kw-text);
-}
-
-.pf-c-table thead,
-.pf-c-table th,
-.pf-v5-c-table thead,
-.pf-v5-c-table th {
-  background: var(--kw-surface-muted);
-  color: var(--kw-text-muted);
-}
-
-.pf-c-table tbody tr:hover,
-.pf-v5-c-table tbody tr:hover {
-  background: var(--kw-surface-muted);
-}
-
-.pf-c-label,
-.pf-v5-c-label {
-  background: var(--kw-surface-muted);
-  color: var(--kw-text);
-  border-radius: 0.5rem;
-}
-
-.pf-c-menu,
-.pf-c-dropdown__menu,
-.pf-c-select__menu,
-.pf-v5-c-menu,
-.pf-v5-c-dropdown__menu,
-.pf-v5-c-select__menu {
-  background: var(--kw-surface);
-  border: 1px solid var(--kw-border);
-  border-radius: 1rem;
-  color: var(--kw-text);
-}
-
-.pf-c-menu__item,
-.pf-c-dropdown__menu-item,
-.pf-c-select__menu-item,
-.pf-v5-c-menu__item,
-.pf-v5-c-dropdown__menu-item,
-.pf-v5-c-select__menu-item {
-  color: var(--kw-text);
-}
-
-.pf-c-menu__item:hover,
-.pf-c-dropdown__menu-item:hover,
-.pf-c-select__menu-item:hover,
-.pf-v5-c-menu__item:hover,
-.pf-v5-c-dropdown__menu-item:hover,
-.pf-v5-c-select__menu-item:hover {
-  background: var(--kw-primary-50);
-  color: var(--kw-link-hover);
-}
-
-.pf-c-divider,
-.pf-v5-c-divider {
-  border-color: var(--kw-border);
-}
-
-#spinner_screen,
-.keycloak__loading-container {
-  background: var(--kw-page-bg);
-  color: var(--kw-text-muted);
-}
-
-#spinner_screen svg,
-.keycloak__loading-container svg {
-  background: transparent !important;
-}
-
-#spinner_screen path {
-  fill: var(--kw-link);
-}
-
-.keycloak__loading-container .pf-v5-c-spinner__path {
-  stroke: var(--kw-link);
-}
-
-/* Hide Keycloak footer branding */
-footer a[href*="keycloak.org"],
-.keycloak__footer,
-.pf-c-page__main-section a[href*="keycloak.org"] {
-  display: none !important;
-}
-
-/* Extra aggressive de-branding for any remaining Keycloak references */
-[data-testid*="keycloak" i],
-[aria-label*="keycloak" i],
-[title*="keycloak" i],
-.pf-v5-c-page__main a[href*="keycloak"],
-.pf-v5-c-page__main-section a[href*="keycloak"] {
-  display: none !important;
-}
-
-/* Make the top masthead toolbar items (user menu) stay but without left brand padding */
-.pf-v5-c-masthead .pf-v5-c-toolbar,
-.pf-v5-c-masthead .pf-v5-c-toolbar__content {
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important;
+.pf-c-button.pf-m-danger,
+.pf-v5-c-button.pf-m-danger {
+  background: #dc2626 !important;
+  color: #fff !important;
 }
 
 /* ============================================
-   Beautiful User Name + Avatar (top right masthead)
-   Clean, modern, simple pill-style user menu
+   Alerts / labels / badges
    ============================================ */
 
-/* Right-side user dropdown toggle container */
-.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type,
-.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type {
-  display: flex;
-  align-items: center;
-  margin-left: auto !important;
-}
-
-/* The clickable user button: avatar + name (no chevron) */
-.pf-v5-c-masthead .pf-v5-c-dropdown__toggle,
-.pf-v5-c-masthead .pf-v5-c-menu-toggle,
-.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type .pf-v5-c-button,
-.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-  padding: 0.2rem 0.75rem 0.2rem 0.35rem !important;
-  border-radius: 9999px !important;
-  background: var(--kw-surface) !important;
-  color: var(--kw-text) !important;
-  font-size: 0.8125rem !important;
-  font-weight: 500 !important;
-  line-height: 1.1;
-  min-height: 2rem;
+.pf-c-alert,
+.pf-v5-c-alert {
+  border-radius: 1rem !important;
   border: 1px solid var(--kw-border) !important;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04) !important;
-  transition: background-color 0.12s ease, border-color 0.12s ease, transform 0.05s ease;
-  cursor: pointer;
 }
 
-/* Stronger hover to indicate it's a button (opens sign out / account menu) */
-.pf-v5-c-masthead .pf-v5-c-dropdown__toggle:hover,
-.pf-v5-c-masthead .pf-v5-c-menu-toggle:hover,
-.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type .pf-v5-c-button:hover,
-.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type .pf-v5-c-button:hover {
-  background-color: var(--kw-surface-muted) !important;
-  border-color: var(--kw-primary-500) !important;
-  transform: translateY(-0.5px);
+.pf-c-label,
+.pf-v5-c-label,
+.pf-c-badge,
+.pf-v5-c-badge {
+  border-radius: 0.5rem !important;
 }
 
-/* Avatar (image or placeholder) - clean circle */
-.pf-v5-c-masthead img,
-.pf-v5-c-masthead .pf-v5-c-avatar,
-.pf-v5-c-masthead [class*="avatar"],
-.pf-v5-c-masthead .pf-c-avatar {
-  width: 28px !important;
-  height: 28px !important;
-  min-width: 28px !important;
-  min-height: 28px !important;
-  border-radius: 9999px !important;
-  object-fit: cover !important;
-  border: 1px solid var(--kw-border-strong) !important;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
-  flex-shrink: 0;
-  background-color: var(--kw-surface-muted);
-  display: inline-block;
-}
+/* ============================================
+   Dropdowns / menus
+   ============================================ */
 
-/* User name text next to avatar (part of the clickable sign-out button) */
-.pf-v5-c-masthead .pf-v5-c-dropdown__toggle span,
-.pf-v5-c-masthead .pf-v5-c-menu-toggle span,
-.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type span:not([class*="icon"]):not([class*="caret"]),
-.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type span {
-  font-size: 0.8125rem !important;
-  font-weight: 500 !important;
+.pf-c-dropdown__menu,
+.pf-v5-c-dropdown__menu,
+.pf-c-menu,
+.pf-v5-c-menu,
+.pf-v5-c-menu__content {
+  background: var(--kw-surface) !important;
+  border: 1px solid var(--kw-border) !important;
+  border-radius: 1rem !important;
+  box-shadow: var(--kw-shadow-lg) !important;
   color: var(--kw-text) !important;
-  white-space: nowrap;
-  max-width: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  letter-spacing: -0.01em;
 }
 
-/* Make the name text participate in button hover indication */
-.pf-v5-c-masthead .pf-v5-c-dropdown__toggle:hover span,
-.pf-v5-c-masthead .pf-v5-c-menu-toggle:hover span,
-.pf-v5-c-masthead .pf-v5-c-toolbar__group:last-of-type:hover span:not([class*="icon"]):not([class*="caret"]),
-.pf-v5-c-masthead .pf-v5-c-toolbar__item:last-of-type:hover span {
+.pf-c-dropdown__menu-item,
+.pf-v5-c-dropdown__menu-item,
+.pf-c-menu__item,
+.pf-v5-c-menu__item {
+  color: var(--kw-text) !important;
+  border-radius: 0.5rem;
+}
+
+.pf-c-dropdown__menu-item:hover,
+.pf-v5-c-dropdown__menu-item:hover,
+.pf-c-menu__item:hover,
+.pf-v5-c-menu__item:hover {
+  background: var(--kw-surface-muted) !important;
+}
+
+/* ============================================
+   Tabs / empty states / misc
+   ============================================ */
+
+.pf-c-tabs__link,
+.pf-v5-c-tabs__link {
+  color: var(--kw-text-muted) !important;
+}
+
+.pf-c-tabs__item.pf-m-current .pf-c-tabs__link,
+.pf-v5-c-tabs__item.pf-m-current .pf-v5-c-tabs__link,
+.pf-v5-c-tabs__link.pf-m-current {
   color: var(--kw-primary-600) !important;
 }
 
-/* Remove dropdown chevron / last caret icon (the final icon in user menu) */
-.pf-v5-c-masthead .pf-v5-c-dropdown__toggle-icon,
-.pf-v5-c-masthead .pf-v5-c-menu-toggle__toggle-icon,
-.pf-v5-c-masthead [class*="caret"],
-.pf-v5-c-masthead [class*="toggle-icon"] {
-  display: none !important;
+.pf-c-empty-state,
+.pf-v5-c-empty-state {
+  color: var(--kw-text-muted);
 }
 
-/* Improve focus ring on user menu */
-.pf-v5-c-masthead .pf-v5-c-dropdown__toggle:focus-visible,
-.pf-v5-c-masthead .pf-v5-c-menu-toggle:focus-visible {
-  outline: none !important;
-  box-shadow: 0 0 0 3px var(--kw-focus) !important;
+.pf-c-spinner,
+.pf-v5-c-spinner {
+  --pf-c-spinner--Color: var(--kw-primary-600);
+  --pf-v5-c-spinner--Color: var(--kw-primary-600);
 }
 
-/* Our injected clean initials avatar (used when no profile picture) */
-.pf-v5-c-masthead .kw-user-initials {
-  flex-shrink: 0;
-  font-family: inherit;
-  user-select: none;
+/* Page section max-width breathing room on large screens */
+.pf-v5-c-page__main-section > .pf-v5-l-grid,
+.pf-v5-c-page__main-section > .pf-v5-c-gallery,
+.pf-c-page__main-section > .pf-l-grid {
+  max-width: 56rem;
+}
+
+/* Expandable sections */
+.pf-c-expandable-section__toggle,
+.pf-v5-c-expandable-section__toggle {
+  color: var(--kw-primary-600) !important;
+}
+
+/* Chip / token */
+.pf-c-chip,
+.pf-v5-c-chip {
+  border-radius: 0.5rem !important;
+  background: var(--kw-surface-muted) !important;
+  border-color: var(--kw-border) !important;
+  color: var(--kw-text-muted) !important;
 }
