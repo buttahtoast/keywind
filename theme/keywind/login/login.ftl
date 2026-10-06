@@ -55,26 +55,24 @@
           name="password"
           type="password"
         />
-        <#if realm.rememberMe && !usernameEditDisabled?? || realm.resetPasswordAllowed>
+        <#if realm.rememberMe && !usernameEditDisabled??>
           <div class="flex items-center justify-between">
-            <#if realm.rememberMe && !usernameEditDisabled??>
-              <@checkbox.kw
-                checked=login.rememberMe??
-                label=msg("rememberMe")
-                name="rememberMe"
-              />
-            </#if>
-            <#if realm.resetPasswordAllowed>
-              <@link.kw color="primary" href=url.loginResetCredentialsUrl size="small">
-                ${msg("doForgotPassword")}
-              </@link.kw>
-            </#if>
+            <@checkbox.kw
+              checked=login.rememberMe??
+              label=msg("rememberMe")
+              name="rememberMe"
+            />
           </div>
         </#if>
         <@buttonGroup.kw>
           <@button.kw color="primary" name="login" type="submit">
             ${msg("doLogIn")}
           </@button.kw>
+          <#if realm.resetPasswordAllowed>
+            <@button.kw color="secondary" component="a" href=url.loginResetCredentialsUrl>
+              ${msg("doForgotPassword")}
+            </@button.kw>
+          </#if>
         </@buttonGroup.kw>
       </@form.kw>
       <@passkeys.homepagePasskey />

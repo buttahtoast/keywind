@@ -1,5 +1,5 @@
 <#macro kw>
-  <body class="text-[var(--kw-text)] antialiased flex flex-col font-sans items-center justify-center min-h-screen overflow-hidden px-4 py-12 sm:py-20 relative">
+  <body class="text-[var(--kw-text)] antialiased flex flex-col font-sans items-center min-h-screen px-4 py-12 sm:py-20 relative">
     <!-- Clean animated landscape background -->
     <div class="landscape absolute inset-0 z-[-1]" aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">

@@ -31,7 +31,7 @@
       <#if mode?? && mode="manual">
         <li>
           <p>${msg("loginTotpManualStep2")}</p>
-          <p class="font-medium text-xl">${totp.totpSecretEncoded}</p>
+          <p class="kw-totp-secret font-medium text-xl">${totp.totpSecretEncoded}</p>
         </li>
         <li>
           <@link.kw color="primary" href=totp.qrUrl>
@@ -56,7 +56,7 @@
           <p>${msg("loginTotpStep2")}</p>
           <img
             alt="Figure: Barcode"
-            class="mx-auto"
+            class="kw-totp-qr mx-auto"
             src="data:image/png;base64, ${totp.totpSecretQrCode}"
           >
           <@link.kw color="primary" href=totp.manualUrl>

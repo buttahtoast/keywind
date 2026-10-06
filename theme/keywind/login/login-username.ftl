@@ -59,6 +59,11 @@
           <@button.kw color="primary" name="login" type="submit">
             ${msg("doLogIn")}
           </@button.kw>
+          <#if realm.resetPasswordAllowed>
+            <@button.kw color="secondary" component="a" href=url.loginResetCredentialsUrl>
+              ${msg("doForgotPassword")}
+            </@button.kw>
+          </#if>
         </@buttonGroup.kw>
       </@form.kw>
       <@passkeys.homepagePasskey />

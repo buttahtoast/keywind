@@ -8,7 +8,7 @@
     <script defer src="/dist/passkeys.js" type="module"></script>
     <script defer src="/src/index.ts" type="module"></script>
   </head>
-  <body class="text-[var(--kw-text)] antialiased flex flex-col font-sans items-center justify-center min-h-screen overflow-hidden px-4 py-12 sm:py-20 relative">
+  <body class="text-[var(--kw-text)] antialiased flex flex-col font-sans items-center min-h-screen px-4 py-12 sm:py-20 relative">
     <!-- Clean animated landscape background -->
     <div class="landscape absolute inset-0 z-[-1]" aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
@@ -80,10 +80,11 @@
             <div class="flex items-center justify-between">
               <div class="flex items-center">
                 <input checked class="h-4 w-4 rounded border-[var(--kw-border)] bg-[var(--kw-surface)] text-primary-600 focus:ring-1 focus:ring-primary-500/40" id="rememberMe" name="rememberMe" type="checkbox"> <label class="ml-2.5 text-[var(--kw-text-muted)] text-sm" for="rememberMe"> Remember me </label>
-              </div><a class="text-primary-600 hover:text-primary-700 text-sm inline-flex transition-colors" href="#loginResetCredentials"> Forgot Password? </a>
+              </div>
             </div>
             <div class="flex flex-col space-y-2 pt-2">
               <button class="bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 px-5 py-3 text-sm flex font-medium gap-2 items-center justify-center relative rounded-2xl transition-all w-full focus:outline-none focus:ring-2 focus:ring-primary-500/40" name="login" type="submit"> Sign In </button>
+              <a class="bg-[var(--kw-surface)] border border-[var(--kw-border)] text-[var(--kw-text)] hover:bg-[var(--kw-surface-muted)] hover:border-[var(--kw-border-strong)] px-5 py-3 text-sm flex font-medium gap-2 items-center justify-center relative rounded-2xl transition-all w-full focus:outline-none focus:ring-2 focus:ring-primary-500/40" href="#loginResetCredentials"> Forgot Password? </a>
             </div>
           </form>
           <div x-data="passkeys" x-init="initPasskeyConditionalUI">

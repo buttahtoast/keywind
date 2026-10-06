@@ -78,6 +78,8 @@
 
 .landscape {
   pointer-events: none;
+  /* Clip drifting clouds so they cannot widen the page. */
+  overflow: hidden;
   /* Clean soft sky */
   background: linear-gradient(
     180deg,
@@ -206,4 +208,36 @@
 @keyframes mist-drift {
   from { transform: translateX(-80px); }
   to { transform: translateX(80px); }
+}
+
+/* Login shell must scroll on a phone.
+   overflow:hidden on body is propagated to the viewport, so touch scrolling
+   never starts. justify-content:center then parks the top of a tall card
+   (OTP setup) above y=0, where it cannot be scrolled to.
+   Auto margins center short pages and collapse to 0 when the card is taller
+   than the viewport, so the whole card stays in the scroll range. */
+body:has(> .landscape) {
+  overflow: visible;
+  justify-content: flex-start;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body:has(> .landscape) > .landscape + div {
+  margin-block: auto;
+  flex-shrink: 0;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.kw-totp-qr {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.kw-totp-secret {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
