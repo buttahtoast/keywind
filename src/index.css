@@ -226,8 +226,8 @@ body:has(> .landscape) {
 body:has(> .landscape) > .landscape + div {
   margin-block: auto;
   flex-shrink: 0;
-  max-width: 100%;
-  min-width: 0;
+  width: 100%;
+  max-width: 26rem;
 }
 
 .kw-totp-qr {
